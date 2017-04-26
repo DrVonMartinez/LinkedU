@@ -67,73 +67,73 @@ CREATE TABLE LinkedU.Login
 );
 
 
-INSERT VALUES INTO LinkedU.Login (userName, password, accountType)
+INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('admin', 'it353it353', 'admin');
 
-INSERT VALUES INTO LinkedU.Login (userName, password, accountType)
+INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('student1', 'password', 'student');
 
-INSERT VALUES INTO LinkedU.Login (userName, password, accountType)
+INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('student2', 'password2', 'student');
 
-INSERT VALUES INTO LinkedU.Login (userName, password, accountType)
+INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('student3', 'password3', 'student');
 
-INSERT VALUES INTO LinkedU.Login (userName, password, accountType)
+INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('recruiter1', 'password1', 'recruiter');
 
-INSERT VALUES INTO LinkedU.Login (userName, password, accountType)
+INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('recruiter2', 'password2', 'recruiter');
 
-INSERT VALUES INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber, phoneNetwork)
+INSERT INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber, phoneNetwork)
 VALUES ('student1', 'test', 'student1', 'a generically named high school',NULL ,28, NULL, 2.5, '2013-05-28', 'IL','bknigh1@ilstu.edu','6309346236', 'Google');
 
-INSERT VALUES INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber, phoneNetwork)
+INSERT INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber, phoneNetwork)
 VALUES ('student2', 'test', 'student2', 'a differently named high school','a college that exists',32, NULL, 4.0, '2017-05-28', 'IL','bknigh1@ilstu.edu','6309346236', 'Google');
 
-INSERT VALUES INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber,phoneNetwork, accountStatus)
+INSERT INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber,phoneNetwork, accountStatus)
 VALUES ('student3', 'test', 'student3', 'another different named high school',NULL,NULL, 400, 3.5, '2018-05-28', 'IL','bknigh1@ilstu.edu','6309346236','Google',true);
 
-INSERT VALUES INTO LinkedU.Student (userName, firstName, lastName, university, email, phoneNumber, phoneNetwork)
+INSERT INTO LinkedU.Student (userName, firstName, lastName, university, email, phoneNumber, phoneNetwork)
 VALUES ('recruiter1', 'test', 'recruiter1', 'Illinois State University', 'bknigh1@ilstu.edu','6309346236', 'Google');
 
-INSERT VALUES INTO LinkedU.Student (userName, firstName, lastName, university, email, phoneNumber, accountStatus, phoneNetwork)
+INSERT INTO LinkedU.Student (userName, firstName, lastName, university, email, phoneNumber, accountStatus, phoneNetwork)
 VALUES ('recruiter2', 'test', 'recruiter1', 'University of Illinois', 'bknigh1@ilstu.edu','6309346236', true, 'Google');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Mathematics');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Engineering');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Teaching');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Physics');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Computer Science');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Nursing');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Biology');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Chemistry');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Business');
 
-INSERT VALUES INTO LinkedU.Major (majorName)
+INSERT INTO LinkedU.Major (majorName)
 VALUES ('Law');
 
-INSERT VALUES INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
+INSERT INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
 VALUES ('University of Illinois', 'IL', NULL,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
 3.32,26,1340,'http://illinois.edu/','http://admissions.illinois.edu/apply/' , false, '2,1,5,8',0);
 
-INSERT VALUES INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
+INSERT INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
 VALUES ('Illinois State University', 'IL', NULL,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
 2.37,22,NULL,'https://illinoisstate.edu/','http://admissions.illinoisstate.edu/apply/' , true, '3,1,5,6,9',0);
