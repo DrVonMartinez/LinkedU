@@ -5,10 +5,16 @@
  */
 package DAO;
 
+import java.util.ArrayList;
+import model.StudentBean;
+
 /**
  *
  * @author it353s723
  */
-public class StudentDAO {
-    
+public interface StudentDAO 
+{
+    public int createStudent(StudentBean aStudent);
+    public ArrayList findAll();
+    public StudentBean findByName(String firstName, String lastName); 
 }
