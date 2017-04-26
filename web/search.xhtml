@@ -9,10 +9,37 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>Search Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+    <h:body>
+        <h2>Search for a student</h2><br/>
+        <h:form>
+            Last Name: <h:inputText id="firstName" value="#{studentController.student.lastName}">
+            </h:inputText><br/>
+            <h:commandButton id="submitID" value="Search" action="#{studentController.student.search()}"/>
+            <h:messages />
+        </h:form>
+        <h:dataTable id="stuTableID" value="#{studentController.student.students}" var="aRow" 
+                     border="1" cellpadding="2" cellspacing="0">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="First Name"/>
+                </f:facet>
+                <h:outputText value="#{aRow.firstName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Last Name"/>
+                </f:facet>
+                <h:outputText value="#{aRow.lastName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="User Name"/>
+                </f:facet>
+                <h:outputText value="#{aRow.userName}"/>
+            </h:column>
+        </h:dataTable>
+    </h:body>
 </html>
