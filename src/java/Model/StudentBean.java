@@ -162,7 +162,7 @@ public class StudentBean
         this.graduationDate = graduationDate;
     }
 
-    public boolean getAccountStatus() {
+    public boolean isAccountStatus() {
         return accountStatus;
     }
 
