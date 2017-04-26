@@ -80,51 +80,39 @@ public class StudentDAOImpl implements StudentDAO {
 
     }
 
-    private static StudentBean loadStudentsFromDB(String query) {
+     public List<StudentBean> loadStudentsFromDB(String query) throws SQLException {
 
+        List<StudentBean> students = new ArrayList<StudentBean>();
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://localhost:1527/LinkedU";
+        String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/armalit_Sp2017_LinkedU";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
-
-        ArrayList aStudentCollection = new ArrayList();
         StudentBean aStudent = null;
         try {
-
-            // With the connection made, create a statement to talk to the DB server.
-            // Create a SQL statement to query, retrieve the rows one by one (by going to the
-            // columns), and formulate the result string to send back to the client.
             Statement stmt = DBConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            String firstName, lastName, userName, highSchool, currentUniversity, universityChoices, majorChoices, essay, activities, email, currentState, phoneNumber, phoneNetwork;
-            String graduationDate;
-            int ACTScores, SATScores;
-            double GPA;
-            boolean accountStatus;
-            while (rs.next()) {
-                firstName = rs.getString("firstName");
-                lastName = rs.getString("lastName");
-                userName = rs.getString("userName");
-                highSchool = rs.getString("highSchool");
-                currentUniversity = rs.getString("currentUniversity");
-                universityChoices = rs.getString("universityChoices");
-                majorChoices = rs.getString("majorChoices");
-                essay = rs.getString("essay");
-                activities = rs.getString("activities");
-                ACTScores = rs.getInt("ACTScores");
-                SATScores = rs.getInt("SATScores");
-                GPA = rs.getDouble("GPA");
-                graduationDate = rs.getString("graduationDate");
-                accountStatus = rs.getBoolean("accountStatus");
-                email = rs.getString("email");
-                currentState = rs.getString("currentState");
-                phoneNumber = rs.getString("phoneNumber");
-                phoneNetwork = rs.getString("phoneNetwork");
-
-                // make a StudentOld object out of the values
-                aStudent = new StudentBean(firstName, lastName, userName, highSchool, currentUniversity, universityChoices, majorChoices, essay, activities, ACTScores, SATScores, GPA, graduationDate, accountStatus, email, currentState, phoneNumber, phoneNetwork);
-
-                // add the newly created object to the collection
-                aStudentCollection.add(aStudent);
+            while (rs.next()) 
+            {
+                StudentBean stu = new StudentBean();
+                stu.setFirstName(rs.getString("firstName"));
+                stu.setLastName(rs.getString("lastName"));
+                stu.setUserName(rs.getString("userName"));
+                stu.setHighSchool(rs.getString("highSchool"));
+                stu.setCurrentUniversity(rs.getString("lastName"));
+                stu.setUniversityChoices(rs.getString("universityChoices"));
+                stu.setMajorChoices(rs.getString("majorChoices"));
+                stu.setEssay(rs.getString("essay"));
+                stu.setActivities(rs.getString("activities"));
+                stu.setACTScores(rs.getInt("ACTScores"));
+                stu.setSATScores(rs.getInt("SATScores"));
+                stu.setGPA(rs.getDouble("GPA"));
+                stu.setGraduationDate(rs.getDate("graduationDate"));
+                stu.setAccountStatus(rs.getBoolean("accountStatus"));
+                stu.setEmail(rs.getString("email"));
+                stu.setCurrentState(rs.getString("currentState"));
+                stu.setPhoneNumber(rs.getString("phoneNumber"));
+                stu.setPhoneNetwork(rs.getString("phoneNetwork"));
+                
+                students.add(stu);
             }
             rs.close();
             stmt.close();
@@ -137,9 +125,8 @@ public class StudentDAOImpl implements StudentDAO {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        aStudent.setStudents(aStudentCollection);
-        return aStudent;
-    }
+        return students;
+    } 
 
     @Override
     public StudentBean findByName(String firstName, String lastName) {
