@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
 
@@ -105,7 +106,7 @@ public class StudentDAOImpl implements StudentDAO {
                 stu.setACTScores(rs.getInt("ACTScores"));
                 stu.setSATScores(rs.getInt("SATScores"));
                 stu.setGPA(rs.getDouble("GPA"));
-                stu.setGraduationDate(rs.getDate("graduationDate"));
+                stu.setGraduationDate(rs.getString("graduationDate"));
                 stu.setAccountStatus(rs.getBoolean("accountStatus"));
                 stu.setEmail(rs.getString("email"));
                 stu.setCurrentState(rs.getString("currentState"));

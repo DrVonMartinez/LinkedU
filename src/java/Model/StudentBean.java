@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import DAO.StudentDAOImpl;
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.List;
 
 @ManagedBean(name = "StudentBean")
 @SessionScoped
@@ -265,7 +268,7 @@ public class StudentBean extends GenericUserBean implements Serializable
             this.students = aStu.students;
 
         }
-        return students;
+        return (ArrayList) students;
     }
 
     public void setStudents(ArrayList students) {
