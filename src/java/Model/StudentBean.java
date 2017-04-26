@@ -1,14 +1,13 @@
-package model;
+package Model;
 
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import DAO.StudentDAOImpl;
-import java.util.Date;
 
 @ManagedBean(name = "Student")
 @SessionScoped
-public class StudentBean 
+public class StudentBean extends GenericUserBean
 {
 
     private String firstName;
@@ -23,20 +22,42 @@ public class StudentBean
     private int ACTScores;
     private int SATScores;
     private double GPA;
-    private Date graduationDate;
+    private String graduationDate;
     private boolean accountStatus;
     private String email;
     private String currentState;
     private String phoneNumber;
     private String phoneNetwork;
-
+    
     private ArrayList students;
 
     public StudentBean() 
     {
     }
 
-    public StudentBean(String firstName, String lastName, String userName, String highSchool, String currentUniversity, String universityChoices, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, Date graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork, ArrayList students) {
+    public StudentBean(StudentBean sb){
+        this.firstName = sb.firstName;
+        this.lastName = sb.lastName;
+        this.userName = sb.userName;
+        this.highSchool = sb.highSchool;
+        this.currentUniversity = sb.currentUniversity;
+        this.universityChoices = sb.universityChoices;
+        this.majorChoices = sb.majorChoices;
+        this.essay = sb.essay;
+        this.activities = sb.activities;
+        this.ACTScores = sb.ACTScores;
+        this.SATScores = sb.SATScores;
+        this.GPA = sb.GPA;
+        this.graduationDate = sb.graduationDate;
+        this.accountStatus = sb.accountStatus;
+        this.email = sb.email;
+        this.currentState = sb.currentState;
+        this.phoneNumber = sb.phoneNumber;
+        this.phoneNetwork = sb.phoneNetwork;
+        this.students = sb.students;
+    }
+    
+    public StudentBean(String firstName, String lastName, String userName, String highSchool, String currentUniversity, String universityChoices, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, String graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork, ArrayList students) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -57,7 +78,28 @@ public class StudentBean
         this.phoneNetwork = phoneNetwork;
         this.students = students;
     }
-
+    
+    public StudentBean(String firstName, String lastName, String userName, String highSchool, String currentUniversity, String universityChoices, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, String graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.highSchool = highSchool;
+        this.currentUniversity = currentUniversity;
+        this.universityChoices = universityChoices;
+        this.majorChoices = majorChoices;
+        this.essay = essay;
+        this.activities = activities;
+        this.ACTScores = ACTScores;
+        this.SATScores = SATScores;
+        this.GPA = GPA;
+        this.graduationDate = graduationDate;
+        this.accountStatus = accountStatus;
+        this.email = email;
+        this.currentState = currentState;
+        this.phoneNumber = phoneNumber;
+        this.phoneNetwork = phoneNetwork;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
@@ -154,11 +196,11 @@ public class StudentBean
         this.GPA = GPA;
     }
 
-    public Date getGraduationDate() {
+    public String getGraduationDate() {
         return graduationDate;
     }
 
-    public void setGraduationDate(Date graduationDate) {
+    public void setGraduationDate(String graduationDate) {
         this.graduationDate = graduationDate;
     }
 

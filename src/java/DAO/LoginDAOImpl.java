@@ -30,7 +30,7 @@ public class LoginDAOImpl implements LoginDAO{
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
         
-            String query = "SELECT * FROM LinkedU.Login WHERE USERID = ? AND PASSWORD = ?";
+            String query = "SELECT * FROM LinkedU.Login WHERE USERNAME = ? AND PASSWORD = ?";
             PreparedStatement pstmt = DBConn.prepareStatement(query);
             //System.out.println(aLogin.getUserID() + "   --   " + aLogin.getPasswordHash());
             pstmt.setString(1, aLogin.getUserName());
@@ -77,7 +77,7 @@ public class LoginDAOImpl implements LoginDAO{
                         aS = rs.getBoolean("accountStatus");
 
                         // make a StudentBean object out of the values
-                        user = new StudentBean(fN, lN, uN, hS, cU, uC, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe);
+                        user = new StudentBean(fN, lN, uN, hS, cU, uC, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe, null);
                     } else{
                         user = null;
                     }

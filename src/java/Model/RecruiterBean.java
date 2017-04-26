@@ -1,16 +1,13 @@
 package Model;
-
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 /**
  *
  * @author it353s723
  */
-public class RecruiterBean extends GenericUserBean{
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 @ManagedBean(name = "Recruiter")
 @SessionScoped
-public class RecruiterBean {
+public class RecruiterBean extends GenericUserBean{
 
     private String firstName;
     private String lastName;
