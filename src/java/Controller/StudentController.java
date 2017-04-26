@@ -1,16 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 import DAO.*;
 import Model.*;
 import Controller.*;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 /**
  *
  * @author it353s723
  */
-public class StudentController {
-    
+@ManagedBean
+@SessionScoped
+public class StudentController 
+{
+	private StudentBean student;
+
+    public StudentController() 
+	{
+        student = new StudentBean();
+    }
+
+    public StudentBean getStudent() 
+	{
+        return student;
+    }
+
+    public void setStudent(StudentBean student) 
+	{
+        this.student = student;
+    }
 }
