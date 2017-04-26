@@ -28,6 +28,7 @@ public class StudentBean
     private String email;
     private String currentState;
     private String phoneNumber;
+    private String phoneNetwork;
 
     private ArrayList students;
 
@@ -35,7 +36,7 @@ public class StudentBean
     {
     }
 
-    public StudentBean(String firstName, String lastName, String userName, String highSchool, String currentUniversity, String universityChoices, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, Date graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, ArrayList students) {
+    public StudentBean(String firstName, String lastName, String userName, String highSchool, String currentUniversity, String universityChoices, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, Date graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork, ArrayList students) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -53,6 +54,7 @@ public class StudentBean
         this.email = email;
         this.currentState = currentState;
         this.phoneNumber = phoneNumber;
+        this.phoneNetwork = phoneNetwork;
         this.students = students;
     }
 
@@ -191,6 +193,13 @@ public class StudentBean
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+    public String getPhoneNetwork() {
+        return phoneNetwork;
+    }
+
+    public void setPhoneNetwork(String phoneNetwork) {
+        this.phoneNetwork = phoneNetwork;
+    }
 
     public ArrayList getStudents() {
         if (students == null) {
@@ -210,6 +219,7 @@ public class StudentBean
             this.email = aStu.email;
             this.currentState = aStu.currentState;
             this.phoneNumber = aStu.phoneNumber;
+            this.phoneNetwork = aStu.phoneNetwork;
             this.students = aStu.students;
 
         }
