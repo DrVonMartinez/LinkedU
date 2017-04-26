@@ -55,12 +55,11 @@ and open the template in the editor.
                     <br/><br/><br/><br/><br/><br/><br/><br/>
                     <div class="span12 footer">     
                             <h:form> 
-                                <p:selectOneMenu id="accountType" value="#{voteController.accountType}">
+                                <p:selectOneMenu id="accountType" value="#{homeController.user.accountType}">
                                     <f:selectItems value="#{homeController.accountTypes}" />
                                 </p:selectOneMenu><br/><br/>
-                                <h:inputText a:placeholder="Usernamep:selectOneMenu id="accountType" value="#{voteController.accountType}">
-                                    <f:selectItems value="#{homeController.accountTypes}" />
-                                </p:selectOneMenu><br/><br/>" value="#{homeController.login.userName}"/>
+                                <h:inputText a:placeholder="Username" id="userName" value="#{homeController.login.userName}"></h:inputText>
+
                                 <h:inputSecret id="password" a:placeholder="Password" value = "#{homeController.login.password}">
                                     <f:validateRegex pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"/></h:inputSecret>
                                 <h:inputSecret id="confirm password" a:placeholder="Confirm Password" value ="#{homeController.login.confirmPassword}">

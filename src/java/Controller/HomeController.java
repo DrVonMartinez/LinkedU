@@ -8,6 +8,7 @@ package Controller;
 import DAO.*;
 import Model.*;
 import java.util.ArrayList;
+import java.util.List;
 import javamailapp.JavaMailApp;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
@@ -24,16 +25,20 @@ import javax.faces.event.ComponentSystemEvent;
 @SessionScoped
 public class HomeController {
     
-    protected GenericUserBean user;
-    protected StudentBean student;
-    protected RecruiterBean recruiter;
-    protected LoginBean login;
-    protected boolean loggedIn;
+    private GenericUserBean user;
+    private StudentBean student;
+    private RecruiterBean recruiter;
+    private LoginBean login;
+    private boolean loggedIn;
+    private ArrayList<String> accountTypes;
     
     public HomeController(){
         user = new GenericUserBean();
         login = new LoginBean();
         loggedIn = false;
+        accountTypes = new ArrayList<>();
+        accountTypes.add("Student");
+        accountTypes.add("Recruiter");
     }
     
     public String isLogged(ComponentSystemEvent event){
@@ -41,7 +46,7 @@ public class HomeController {
         //add <f:event listener="#{homeController.isLogged}" type="preRenderView" /> tag after <head> tag in html
         
         String navi = null;
-        if (!loggedIn) {
+        if (!isLoggedIn()) {
             FacesContext fc = FacesContext.getCurrentInstance();
             ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
             nav.performNavigation("login?faces-redirect=true");
@@ -65,26 +70,26 @@ public class HomeController {
     
     public String createUser(){
         
-        if(user.getAccountType().equalsIgnoreCase("student")){
+        if(getUser().getAccountType().equalsIgnoreCase("student")){
             StudentDAO studentDAO = new StudentDAOImpl();    // Creating a new object each time.
-            login.setUserName(student.getUserName());
-            user = new StudentBean(student);
-            ArrayList existingUser = studentDAO.findByUserName(student.getUserName());
+            getLogin().setUserName(getStudent().getUserName());
+            setUser(new StudentBean(getStudent()));
+            ArrayList existingUser = studentDAO.findByUserName(getStudent().getUserName());
             if(!existingUser.isEmpty()){   //User exists in DB already
                 FacesMessage message = new FacesMessage("This Username already exists");
                 FacesContext.getCurrentInstance().addMessage("signupForm:userName", message);
                 return null;//"signUp.xhtml?faces-redirect=true";
             }
-            int status = studentDAO.createStudent(student, login);
+            int status = studentDAO.createStudent(getStudent(), getLogin());
             if (status == 1){
                 //JavaMailApp.sendUserCreationEmail(user);
-                loggedIn = true;
+                setLoggedIn(true);
                 return "index.xhtml?faces-redirect=true";
             }
             else{
                 return null;
             }
-        } else if(user.getAccountType().equalsIgnoreCase("recruiter")){
+        } else if(getUser().getAccountType().equalsIgnoreCase("recruiter")){
             //
             /*StudentDAO studentDAO = new StudentDAOImpl();    // Creating a new object each time.
             login.setUserName(student.getUserName());
@@ -104,7 +109,7 @@ public class HomeController {
             else{
                 return null;
             }*/
-        } else if(user.getAccountType().equalsIgnoreCase("admin")){
+        } else if(getUser().getAccountType().equalsIgnoreCase("admin")){
             
         }
         return null;    //remove this later
@@ -112,9 +117,9 @@ public class HomeController {
     
     public String loginUser(){
         LoginDAO aLoginDAO = new LoginDAOImpl();
-        user = aLoginDAO.authenticateUser(login);
-        if(user != null){
-            loggedIn = true;
+        setUser(aLoginDAO.authenticateUser(getLogin()));
+        if(getUser() != null){
+            setLoggedIn(true);
             return "index.xhtml?faces-redirect=true";
             
             //Use this to redirect to different pages after login
@@ -127,7 +132,7 @@ public class HomeController {
             }
             return "index.xhtml?faces-redirect=true";*/
         } else{
-            loggedIn = false;
+            setLoggedIn(false);
             //return to login and add error message
             FacesMessage message = new FacesMessage("Login unsuccessful. Invalid username or password.");
             //                                           vv change this vv                 vv add this to xhtml loginForm
@@ -135,4 +140,76 @@ public class HomeController {
             return null;
         }
     }
+
+    /**
+     * @return the user
+     */
+    public GenericUserBean getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(GenericUserBean user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the student
+     */
+    public StudentBean getStudent() {
+        return student;
+    }
+
+    /**
+     * @param student the student to set
+     */
+    public void setStudent(StudentBean student) {
+        this.student = student;
+    }
+
+    /**
+     * @return the recruiter
+     */
+    public RecruiterBean getRecruiter() {
+        return recruiter;
+    }
+
+    /**
+     * @param recruiter the recruiter to set
+     */
+    public void setRecruiter(RecruiterBean recruiter) {
+        this.recruiter = recruiter;
+    }
+
+    /**
+     * @return the login
+     */
+    public LoginBean getLogin() {
+        return login;
+    }
+
+    /**
+     * @param login the login to set
+     */
+    public void setLogin(LoginBean login) {
+        this.login = login;
+    }
+
+    /**
+     * @return the accountTypes
+     */
+    public ArrayList<String> getAccountTypes() {
+        return accountTypes;
+    }
+
+    /**
+     * @param accountTypes the accountTypes to set
+     */
+    public void setAccountTypes(ArrayList<String> accountTypes) {
+        this.accountTypes = accountTypes;
+    }
+    
+    
 }
