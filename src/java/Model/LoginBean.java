@@ -18,33 +18,33 @@ import java.util.Map;
  */
 @ManagedBean
 @SessionScoped
-public class LoginBean {
+public class LoginBean{
     
-    private String userID;
+    private String userName;
     private String passwordHash;
     public static final String SALT = "Octane";
 
     public LoginBean(){
-        userID = null;
+        userName = null;
         passwordHash = null;
     }
     
-    public LoginBean(String userID, String password){
-        this.userID = userID;
+    public LoginBean(String userName, String password){
+        this.userName = userName;
         passwordHash = generateHash(SALT + password);
     }
     /**
-     * @return the userID
+     * @return the userName
      */
-    public String getUserID() {
-        return userID;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * @param userID the userID to set
+     * @param userName the userName to set
      */
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**

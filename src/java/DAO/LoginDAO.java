@@ -5,12 +5,14 @@
  */
 package DAO;
 
-import Model.StudentBean;
-import Model.LoginBean;
+import Model.*;
+
 /**
  *
  * @author it353s723
  */
-public interface StudentDAO {
+public interface LoginDAO {
+    
+    public GenericUserBean authenticateUser(LoginBean aLogin);
     
 }

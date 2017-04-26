@@ -9,6 +9,6 @@ package Model;
  *
  * @author it353s723
  */
-public class RecruiterBean {
+public class RecruiterBean extends GenericUserBean{
     
 }

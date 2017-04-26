@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package Model;
 
-import Model.StudentBean;
-import Model.LoginBean;
 /**
  *
  * @author it353s723
  */
-public interface StudentDAO {
+public class AdminBean extends GenericUserBean{
     
 }
