@@ -5,9 +5,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import DAO.StudentDAOImpl;
 
-@ManagedBean(name = "Student")
+@ManagedBean(name = "StudentBean")
 @SessionScoped
-public class StudentBean extends GenericUserBean
+public class StudentBean extends GenericUserBean implements Serializable
 {
 
     private String firstName;
@@ -29,7 +29,7 @@ public class StudentBean extends GenericUserBean
     private String phoneNumber;
     private String phoneNetwork;
     
-    private ArrayList students;
+    private List<StudentBean> students;
 
     public StudentBean() 
     {
@@ -270,6 +270,11 @@ public class StudentBean extends GenericUserBean
 
     public void setStudents(ArrayList students) {
         this.students = students;
+    }
+    
+    public void search() throws SQLException {
+        String query = "SELECT * FROM LINKEDU.STUDENT s " + "WHERE s.lastName LIKE '%" + lastName + "%'";
+        students = (new StudentDAOImpl()).loadStudentsFromDB(query);
     }
 
 }
