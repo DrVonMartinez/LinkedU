@@ -20,7 +20,7 @@ CREATE TABLE LinkedU.Student
 	CONSTRAINT student_primarykey_usernamepk PRIMARY KEY(userName)
 );
 
-CREATE TABLE LinkedU.recruiter
+CREATE TABLE LinkedU.Recruiter
 (
 	firstName VARCHAR2(20)NOT NULL,
 	lastName VARCHAR2(20) NOT NULL,

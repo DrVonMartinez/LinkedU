@@ -5,12 +5,49 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      <!--xmlns:p="http://primefaces.org/ui"-->
+    <h:head>
+        <title>Schedule Appointment</title>
+    </h:head>
+    <h:body>
+        <h2>Schedule an Appointment with a University</h2><br/>
+        <h:form id="apptForm">
+            First Name: <h:inputText id="firstName" value="#{profileController.user.firstName}" required="true" requiredMessage="Please enter first name" validatorMessage="First name must be between 2 and 25 characters">
+                <f:validateLength minimum="2" maximum="25"/>
+            </h:inputText>
+            <h:message for="firstName" style="color: red;" /><br/><br/>
+            Last Name: <h:inputText id="lastName" value="#{profileController.user.lastName}" required="true" requiredMessage="Please enter last name" validatorMessage="Last name must be between 2 and 25 characters">
+                <f:validateLength minimum="2" maximum="25"/>
+            </h:inputText>
+            <h:message for="lastName" style="color: red;" /><br/><br/>
+            User ID: <h:inputText id="userID" value="#{profileController.user.userID}" required="true" requiredMessage="Please enter user id">
+                <!--<p:ajax  event="blur" listener="#{bean.ajaxEvent}" update="empname"/>-->
+            </h:inputText>
+            <h:message for="userID" style="color: red;" /><br/><br/>
+            Password: <h:inputSecret redisplay="false" id="password" value="#{profileController.login.passwordHash}" required="true" requiredMessage="Please enter password">
+                <f:validator validatorId="passwordValidator" />
+                <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+            </h:inputSecret>
+            <h:message for="password" style="color: red;" /><br/><br/>
+            Confirm Password: <h:inputSecret redisplay="false" id="confirmPassword" binding="#{confirmPassword}" required="true" requiredMessage="Please enter confirm password">
+            </h:inputSecret>
+            <h:message for="confirmPassword" style="color: red;" /><br/><br/>
+            Email: <h:inputText id="email" value="#{profileController.user.email}" required="true" requiredMessage="Please enter email" validatorMessage="Invalid email format">
+                <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            </h:inputText>
+            <h:message for="email" style="color: red;" /><br/><br/>
+            Security Question: <h:inputText id="securityQuestion" value="#{profileController.user.securityQuestion}" required="true" requiredMessage="Please enter security question">
+            </h:inputText>
+            <h:message for="securityQuestion" style="color: red;" /><br/><br/>
+            Security Answer: <h:inputText id="securityAnswer" value="#{profileController.user.securityAnswer}" required="true" requiredMessage="Please enter security answer">
+            </h:inputText>
+            <h:message for="securityAnswer" style="color: red;" /><br/><br/>
+            <h:commandButton id="submitID" value="Submit" action="#{profileController.createUser()}"/>
+        </h:form>
+
+    </h:body>
 </html>
