@@ -39,7 +39,7 @@ public class StudentDAOImpl implements StudentDAO {
             // columns), and formulate the result string to send back to the client.
             Statement stmt = DBConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            String firstName, lastName, userName, highSchool, currentUniversity, universityChoices, majorChoices, essay, activities, email, currentState, phoneNumber;
+            String firstName, lastName, userName, highSchool, currentUniversity, universityChoices, majorChoices, essay, activities, email, currentState, phoneNumber, phoneNetwork;
             Date graduationDate;
             int ACTScores, SATScores;
             double GPA;
@@ -62,9 +62,10 @@ public class StudentDAOImpl implements StudentDAO {
                 email = rs.getString("email");
                 currentState = rs.getString("currentState");
                 phoneNumber = rs.getString("phoneNumber");
+                phoneNetwork = rs.getString("phoneNetwork");
 
                 // make a StudentOld object out of the values
-                aStudent = new StudentBean(firstName, lastName, userName, highSchool, currentUniversity, universityChoices, majorChoices, essay, activities, ACTScores, SATScores, GPA, graduationDate, accountStatus, email, currentState, phoneNumber, null);
+                aStudent = new StudentBean(firstName, lastName, userName, highSchool, currentUniversity, universityChoices, majorChoices, essay, activities, ACTScores, SATScores, GPA, graduationDate, accountStatus, email, currentState, phoneNumber, phoneNetwork, null);
 
                 // add the newly created object to the collection
                 aStudentCollection.add(aStudent);
