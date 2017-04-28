@@ -8,12 +8,11 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://java.sun.com/jsf/core">
     <head>
-         <title>LinkedU</title>
-       
-        <!-- Styles -->
+        <title>LinkedU</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
         <link href="css/bootstrap-overrides.css" rel="stylesheet"/>
@@ -38,51 +37,34 @@ and open the template in the editor.
                         <ul class="nav pull-right">
                             <li><a href="faces/index.xhtml">HOME</a></li>
                             <li><a class="btn-header" href="faces/signup.xhtml">Sign up</a></li>
-                            <li><a class="btn-header active" href="faces/login.xhtml">Sign in</a></li>
+                            <li><a class="btn-header active" href="faces/login.xhtml">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Sign In -->
+        
+        
         <div id="sign_in1">
             <div class="container">
-                <div class="row">
-                    <div class="span12 header">
-                        <h4>Create your account</h4>
-                    </div>
-                    <br/><br/><br/><br/><br/><br/><br/><br/>
-                    <div class="span12 footer">     
-                            <h:form> 
-                                <p:selectOneMenu id="accountType" value="#{homeController.user.accountType}">
-                                    <f:selectItems value="#{homeController.accountTypes}" />
-                                </p:selectOneMenu><br/><br/>
-                                <h:inputText a:placeholder="Username" id="userName" value="#{homeController.login.userName}"></h:inputText>
-                                <h:inputSecret id="password" a:placeholder="Password" value = "#{homeController.login.password}">
-                                    <f:validateRegex pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"/></h:inputSecret>
-                                <h:inputSecret id="confirm password" a:placeholder="Confirm Password" value ="#{homeController.login.password}">
-                                    </h:inputSecret><br/>
-                                <h:commandButton type="submit" value="sign up" action = "#{homeController.createUser()}"/>
-                            </h:form>
-                                         
-                    </div>
-
-                    <div class="span12 dosnt">
-                        <span>Already have an account?</span>
-                        <a href="faces/login.xhtml">Sign in</a>
-                    </div>
+                <div class="row">  
+                    <h1 style = "color:white;">
+                        Welcome <h:outputText value="#{homeController.login.userName}"/>
+                    </h1>
+                    <h3 style = "color: white;">
+                        <h:form>
+                            Reset Password<br/>
+                            <h:inputSecret id="password" a:placeholder="Password" value = "#{homeController.login.passwordHash}">
+                            <f:validateRegex pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"/></h:inputSecret><br/>
+                        </h:form>
+                    </h3>
+                    
                 </div>
             </div>
         </div>
-
-
-
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/theme.js"></script>
-    <script>
-        $('.btn').button();
-    </script>
+        
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/theme.js"></script>
     </body>
 </html>
