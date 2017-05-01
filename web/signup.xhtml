@@ -56,13 +56,14 @@ and open the template in the editor.
                     <div class="span12 footer">     
                             <h:form> 
                                 <p:selectOneMenu id="accountType" value="#{homeController.user.accountType}">
-                                    <f:selectItems value="#{homeController.accountTypes}" />
+                                    <f:selectItems value="#{homeController.accountTypes}"/>
                                 </p:selectOneMenu><br/><br/>
-                                <h:inputText a:placeholder="Username" id="userName" value="#{homeController.login.userName}"></h:inputText>
-                                <h:inputSecret id="password" a:placeholder="Password" value = "#{homeController.login.password}">
-                                    <f:validateRegex pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"/></h:inputSecret>
-                                <h:inputSecret id="confirm password" a:placeholder="Confirm Password" value ="#{homeController.login.password}">
-                                    </h:inputSecret><br/>
+                                <h:inputText a:placeholder="Username" id="userName" value="#{homeController.login.userName}"/><br/>
+                                <h:inputText a:placeholder="First name" id="firstName" value="#{homeController.student.firstName}"/>
+                                <h:inputText a:placeholder="Last name" id="lastName" value="#{homeController.student.lastName}"/><br/>
+                                <h:inputText a:placeholder="Phone Number" id="phoneNumber" value="#{homeController.student.phoneNumber}"/><br/>
+                                <h:inputSecret id="password" a:placeholder="Password" value = "#{homeController.login.passwordHash}"/><br/>
+                                <h:inputSecret id="confirmPassword" a:placeholder="Confirm Password" value ="#{homeController.login.passwordHash}"/><br/>
                                 <h:commandButton type="submit" value="sign up" action = "#{homeController.createUser()}"/>
                             </h:form>
                                          
