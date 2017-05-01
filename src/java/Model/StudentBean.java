@@ -236,6 +236,13 @@ public class StudentBean extends GenericUserBean implements Serializable
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        if(phoneNumber.contains("-"))
+        {
+            String[] brokenNumber = phoneNumber.split("-");
+            phoneNumber = "";
+            for(String i :brokenNumber)
+                phoneNumber += i;
+        }
         this.phoneNumber = phoneNumber;
     }
     public String getPhoneNetwork() {
