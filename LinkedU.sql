@@ -30,6 +30,7 @@ CREATE TABLE LinkedU.Recruiter
 	accountStatus BOOLEAN default false,
 	email VARCHAR(35) NOT NULL,
 	phoneNumber CHAR(10) NOT NULL,
+	phoneNetwork VARCHAR(20) NOT NULL,
 	CONSTRAINT recruiter_primarykey_usernamepk PRIMARY KEY(userName)
 );
 

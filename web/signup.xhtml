@@ -9,8 +9,10 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition>
+    <h:head>
          <title>LinkedU</title>
        
         <!-- Styles -->
@@ -21,8 +23,8 @@ and open the template in the editor.
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'/>
         <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection"/>
         <link rel="stylesheet" href="css/sign-in.css" type="text/css" media="screen" />
-    </head>
-    <body>
+    </h:head>
+    <h:body>
         <div class="navbar navbar-inverse navbar-static-top">
             <div class="navbar-inner">
                 <div class="container">
@@ -36,9 +38,9 @@ and open the template in the editor.
                     </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
-                            <li><a href="faces/index.xhtml">HOME</a></li>
-                            <li><a class="btn-header" href="faces/signup.xhtml">Sign up</a></li>
-                            <li><a class="btn-header active" href="faces/login.xhtml">Sign in</a></li>
+                            <li><a href="index.xhtml">HOME</a></li>
+                            <li><a class="btn-header" href="signup.xhtml">Sign up</a></li>
+                            <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
                         </ul>
                     </div>
                 </div>
@@ -49,41 +51,128 @@ and open the template in the editor.
         <div id="sign_in1">
             <div class="container">
                 <div class="row">
-                    <div class="span12 header">
+                    <div class="span12 header" style="margin-bottom:20px;">
                         <h4>Create your account</h4>
-                    </div>
-                    <br/><br/><br/><br/><br/><br/><br/><br/>
-                    <div class="span12 footer">     
-                            <h:form> 
-                                <p:selectOneMenu id="accountType" value="#{homeController.user.accountType}">
-                                    <f:selectItems value="#{homeController.accountTypes}"/>
-                                </p:selectOneMenu><br/><br/>
-                                <h:inputText a:placeholder="Username" id="userName" value="#{homeController.login.userName}"/><br/>
-                                <h:inputText a:placeholder="First name" id="firstName" value="#{homeController.student.firstName}"/>
-                                <h:inputText a:placeholder="Last name" id="lastName" value="#{homeController.student.lastName}"/><br/>
-                                <h:inputText a:placeholder="Phone Number" id="phoneNumber" value="#{homeController.student.phoneNumber}"/><br/>
-                                <h:inputSecret id="password" a:placeholder="Password" value = "#{homeController.login.passwordHash}"/><br/>
-                                <h:inputSecret id="confirmPassword" a:placeholder="Confirm Password" value ="#{homeController.login.passwordHash}"/><br/>
-                                <h:commandButton type="submit" value="sign up" action = "#{homeController.createUser()}"/>
-                            </h:form>
-                                         
-                    </div>
-
-                    <div class="span12 dosnt">
                         <span>Already have an account?</span>
-                        <a href="faces/login.xhtml">Sign in</a>
+                        <a href="login.xhtml" style="color: #fff; border-bottom: 1px solid white;">Sign in</a>
+                    </div>
+                    <div class="span12 footer" style="box-shadow: 0 0 5px 0 rgb(238, 238, 238);background: white;border:1px solid #DFDFDF;border-radius: 5px;width: 90%;padding: 35px 0 30px;">
+                        <h:selectOneMenu id="accountType" value="#{homeController.login.accountType}" onchange="handleChange(this.value)">
+                            <f:selectItems value="#{homeController.accountTypes}" />
+                        </h:selectOneMenu><br/><br/>
+                        <h:form id="studentSignupForm"> 
+                            <div id="studentForm">
+                                First Name: <h:inputText id="stuFirstName" value="#{homeController.student.firstName}" required="true" requiredMessage="Please enter first name" validatorMessage="First name must be between 2 and 25 characters">
+                                    <f:validateLength minimum="2" maximum="25"/>
+                                </h:inputText>
+                                <h:message for="stuFirstName" style="color: red;" /><br/><br/>
+                                Last Name: <h:inputText id="stuLastName" value="#{homeController.student.lastName}" required="true" requiredMessage="Please enter last name" validatorMessage="Last name must be between 2 and 25 characters">
+                                    <f:validateLength minimum="2" maximum="25"/>
+                                </h:inputText>
+                                <h:message for="stuLastName" style="color: red;" /><br/><br/>
+                                Username: <h:inputText id="stuUserName" value="#{homeController.student.userName}" required="true" requiredMessage="Please enter username">
+                                    <!--<p:ajax  event="blur" listener="#{bean.ajaxEvent}" update="empname"/>-->
+                                </h:inputText>
+                                <h:message for="stuUserName" style="color: red;" /><br/><br/>
+                                Password: <h:inputSecret redisplay="false" id="stuPassword" value="#{homeController.login.passwordHash}" required="true" requiredMessage="Please enter password">
+                                    <f:validator validatorId="studentPasswordValidator" />
+                                    <f:attribute name="studentConfirmPassword" value="#{studentConfirmPassword}" />
+                                </h:inputSecret>
+                                <h:message for="stuPassword" style="color: red;" /><br/><br/>
+                                Confirm Password: <h:inputSecret redisplay="false" id="stuConfirmPassword" binding="#{studentConfirmPassword}" required="true" requiredMessage="Please enter confirm password">
+                                </h:inputSecret>
+                                <h:message for="stuConfirmPassword" style="color: red;" /><br/><br/>
+                                Email: <h:inputText id="stuEmail" value="#{homeController.student.email}" required="true" requiredMessage="Please enter email" validatorMessage="Invalid email format">
+                                    <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </h:inputText>
+                                <h:message for="stuEmail" style="color: red;" /><br/><br/>
+                                Phone Number: <h:inputText id="stuPhoneNumber" value="#{homeController.student.phoneNumber}" required="true" requiredMessage="Please enter phone number" validatorMessage="Phone number must be between 10 characters">
+                                    <f:validateLength minimum="10" maximum="10"/>
+                                </h:inputText>
+                                <h:message for="stuPhoneNumber" style="color: red;" /><br/><br/>
+                                Phone Network: <h:selectOneMenu id="stuPhoneNetwork" value="#{homeController.student.phoneNetwork}" required="true" requiredMessage="Please select phone carrier">
+                                    <f:selectItems value="#{homeController.phoneCarriers}" />
+                                </h:selectOneMenu><br/><br/>
+                                <h:message for="stuPhoneNetwork" style="color: red;" /><br/><br/>
+
+                                <h:commandButton id="stuSubmitID" value="Submit" action="#{homeController.createStudent()}"/>
+                            </div>
+                        </h:form>
+                        <h:form id="recruiterSignupForm" style="display:none;">
+                            <div id="recruiterForm">
+                                First Name: <h:inputText id="recFirstName" value="#{homeController.recruiter.firstName}" required="true" requiredMessage="Please enter first name" validatorMessage="First name must be between 2 and 25 characters">
+                                    <f:validateLength minimum="2" maximum="25"/>
+                                </h:inputText>
+                                <h:message for="recFirstName" style="color: red;" /><br/><br/>
+                                Last Name: <h:inputText id="recLastName" value="#{homeController.recruiter.lastName}" required="true" requiredMessage="Please enter last name" validatorMessage="Last name must be between 2 and 25 characters">
+                                    <f:validateLength minimum="2" maximum="25"/>
+                                </h:inputText>
+                                <h:message for="recLastName" style="color: red;" /><br/><br/>
+                                Username: <h:inputText id="recUserName" value="#{homeController.recruiter.userName}" required="true" requiredMessage="Please enter username">
+                                    <!--<p:ajax  event="blur" listener="#{bean.ajaxEvent}" update="empname"/>-->
+                                </h:inputText>
+                                <h:message for="recUserName" style="color: red;" /><br/><br/>
+                                Password: <h:inputSecret redisplay="false" id="recPassword" value="#{homeController.login.passwordHash}" required="true" requiredMessage="Please enter password">
+                                    <f:validator validatorId="recruiterPasswordValidator" />
+                                    <f:attribute name="recruiterConfirmPassword" value="#{recruiterConfirmPassword}" />
+                                </h:inputSecret>
+                                <h:message for="recPassword" style="color: red;" /><br/><br/>
+                                Confirm Password: <h:inputSecret redisplay="false" id="recConfirmPassword" binding="#{recruiterConfirmPassword}" required="true" requiredMessage="Please enter confirm password">
+                                </h:inputSecret>
+                                <h:message for="recConfirmPassword" style="color: red;" /><br/><br/>
+                                University: <h:selectOneMenu id="recUniversity" value="#{homeController.recruiter.university}">
+                                    <f:selectItems value="#{homeController.getUniversities()}" />
+                                </h:selectOneMenu><br/><br/>
+                                Email: <h:inputText id="recEmail" value="#{homeController.recruiter.email}" required="true" requiredMessage="Please enter email" validatorMessage="Invalid email format">
+                                    <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </h:inputText>
+                                <h:message for="recEmail" style="color: red;" /><br/><br/>
+                                Phone Number: <h:inputText id="recPhoneNumber" value="#{homeController.recruiter.phoneNumber}" required="true" requiredMessage="Please enter phone number" validatorMessage="Phone number must be between 10 characters">
+                                    <f:validateLength minimum="10" maximum="10"/>
+                                </h:inputText>
+                                <h:message for="recPhoneNumber" style="color: red;" /><br/><br/>
+                                Phone Network: <h:selectOneMenu id="recPhoneNetwork" value="#{homeController.recruiter.phoneNetwork}" required="true" requiredMessage="Please select phone carrier">
+                                    <f:selectItems value="#{homeController.phoneCarriers}" />
+                                </h:selectOneMenu><br/><br/>
+                                <h:message for="recPhoneNetwork" style="color: red;" /><br/><br/>
+                                <h:commandButton id="recSubmitID" value="Submit" action="#{homeController.createRecruiter()}"/>
+                            </div>
+                        </h:form>             
                     </div>
                 </div>
             </div>
         </div>
 
 
-
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/theme.js"></script>
-    <script>
-        $('.btn').button();
-    </script>
-    </body>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/theme.js"></script>
+        <script>
+            //$(document).ready(function(){
+                function handleChange(selection){
+                    console.log('changed');
+                    if(selection == 'Recruiter'){
+                       $('#studentSignupForm').hide();
+                       $('#recruiterSignupForm').show();
+                   } else if(selection == "Student"){
+                       $('#studentSignupForm').show();
+                       $('#recruiterSignupForm').hide();
+                   }
+                };
+                /*$('#accountType').on('change', function(){
+                    console.log('changed');
+                    if(this.value == 'Recruiter'){
+                       $('#studentForm').hide();
+                       $('#recruiterForm').show();
+                   } else if(this.value == "Student"){
+                       $('#studentForm').show();
+                       $('#recruiterForm').hide();
+                   }
+                });*/
+            //});
+        </script>
+    </h:body>
+    </ui:composition>
 </html>

@@ -22,6 +22,7 @@ public class LoginBean{
     
     private String userName;
     private String passwordHash;
+    private String accountType;
     public static final String SALT = "Octane";
 
     public LoginBean(){
@@ -80,5 +81,18 @@ public class LoginBean{
 
         return hash.toString();
     }
-    
+
+    /**
+     * @return the accountType
+     */
+    public String getAccountType() {
+        return accountType;
+    }
+
+    /**
+     * @param accountType the accountType to set
+     */
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 }

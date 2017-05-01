@@ -16,10 +16,11 @@ public class RecruiterBean extends GenericUserBean{
     private boolean accountStatus;
     private String email;
     private String phoneNumber;
+    private String phoneNetwork;
     
     public RecruiterBean(){
     }
-    public RecruiterBean(String firstName, String lastName, String userName, String university, boolean accountStatus, String email, String phoneNumber)
+    public RecruiterBean(String firstName, String lastName, String userName, String university, boolean accountStatus, String email, String phoneNumber, String phoneNetwork)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,7 +29,7 @@ public class RecruiterBean extends GenericUserBean{
         this.accountStatus = accountStatus;
         this.email = email;
         this.phoneNumber = phoneNumber;
-                
+        this.phoneNetwork = phoneNetwork;        
     }
     public String getFirstName() {
         return firstName;
@@ -82,5 +83,19 @@ public class RecruiterBean extends GenericUserBean{
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * @return the phoneNetwork
+     */
+    public String getPhoneNetwork() {
+        return phoneNetwork;
+    }
+
+    /**
+     * @param phoneNetwork the phoneNetwork to set
+     */
+    public void setPhoneNetwork(String phoneNetwork) {
+        this.phoneNetwork = phoneNetwork;
     }
 }

@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class StudentDAOImpl implements StudentDAO {
+public class RecruiterDAOImpl implements RecruiterDAO {
 
     @Override
-    public int createStudent(StudentBean aStudent, LoginBean aLogin) {
+    public int createRecruiter(RecruiterBean aRecruiter, LoginBean aLogin) {
         
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -30,28 +30,18 @@ public class StudentDAOImpl implements StudentDAO {
             String insertString;
             //String newFirstName = aUser.getFirstName().replace("'","''");
             //String newLastName = aUser.getLastName().replace("'","''");
-            insertString = "INSERT INTO LinkedU.Student VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            insertString = "INSERT INTO LinkedU.Recruiter VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = DBConn.prepareStatement(insertString);
             
-            pstmt.setString(1, aStudent.getFirstName());
-            pstmt.setString(2, aStudent.getLastName());
-            pstmt.setString(3, aStudent.getUserName());
-            pstmt.setString(4, aStudent.getHighSchool());
-            pstmt.setString(5, aStudent.getCurrentUniversity());
-            pstmt.setString(6, aStudent.getUniversityChoices());
-            pstmt.setString(7, aStudent.getMajorChoices());
-            pstmt.setString(8, aStudent.getEssay());
-            pstmt.setString(9, aStudent.getActivities());
-            pstmt.setInt(10, aStudent.getACTScores());
-            pstmt.setInt(11, aStudent.getSATScores());
-            pstmt.setDouble(12, aStudent.getGPA());
-            pstmt.setString(13, aStudent.getGraduationDate());
-            pstmt.setBoolean(14, aStudent.isAccountStatus());
-            pstmt.setString(15, aStudent.getEmail());
-            pstmt.setString(16, aStudent.getCurrentState());
-            pstmt.setString(17, aStudent.getPhoneNumber());
-            pstmt.setString(18, aStudent.getPhoneNetwork());
+            pstmt.setString(1, aRecruiter.getFirstName());
+            pstmt.setString(2, aRecruiter.getLastName());
+            pstmt.setString(3, aRecruiter.getUserName());
+            pstmt.setString(4, aRecruiter.getUniversity());
+            pstmt.setBoolean(5, aRecruiter.isAccountStatus());
+            pstmt.setString(6, aRecruiter.getEmail());
+            pstmt.setString(7, aRecruiter.getPhoneNumber());
+            pstmt.setString(8, aRecruiter.getPhoneNetwork());
             
             rowCount = pstmt.executeUpdate();
             
@@ -83,39 +73,29 @@ public class StudentDAOImpl implements StudentDAO {
 
     }
 
-     public List<StudentBean> loadStudentsFromDB(String query) throws SQLException {
+     public List<RecruiterBean> loadRecruitersFromDB(String query) throws SQLException {
 
-        List<StudentBean> students = new ArrayList<StudentBean>();
+        List<RecruiterBean> recruiters = new ArrayList<RecruiterBean>();
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
         String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/armalit_Sp2017_LinkedU";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
-        StudentBean aStudent = null;
+        RecruiterBean aRecruiter = null;
         try {
             Statement stmt = DBConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) 
             {
-                StudentBean stu = new StudentBean();
-                stu.setFirstName(rs.getString("firstName"));
-                stu.setLastName(rs.getString("lastName"));
-                stu.setUserName(rs.getString("userName"));
-                stu.setHighSchool(rs.getString("highSchool"));
-                stu.setCurrentUniversity(rs.getString("lastName"));
-                stu.setUniversityChoices(rs.getString("universityChoices"));
-                stu.setMajorChoices(rs.getString("majorChoices"));
-                stu.setEssay(rs.getString("essay"));
-                stu.setActivities(rs.getString("activities"));
-                stu.setACTScores(rs.getInt("ACTScores"));
-                stu.setSATScores(rs.getInt("SATScores"));
-                stu.setGPA(rs.getDouble("GPA"));
-                stu.setGraduationDate(rs.getString("graduationDate"));
-                stu.setAccountStatus(rs.getBoolean("accountStatus"));
-                stu.setEmail(rs.getString("email"));
-                stu.setCurrentState(rs.getString("currentState"));
-                stu.setPhoneNumber(rs.getString("phoneNumber"));
-                stu.setPhoneNetwork(rs.getString("phoneNetwork"));
+                RecruiterBean rec = new RecruiterBean();
+                rec.setFirstName(rs.getString("firstName"));
+                rec.setLastName(rs.getString("lastName"));
+                rec.setUserName(rs.getString("userName"));
+                rec.setUniversity(rs.getString("university"));
+                rec.setAccountStatus(rs.getBoolean("accountStatus"));
+                rec.setEmail(rs.getString("email"));
+                rec.setPhoneNumber(rs.getString("phoneNumber"));
+                rec.setPhoneNetwork(rs.getString("phoneNetwork"));
                 
-                students.add(stu);
+                recruiters.add(rec);
             }
             rs.close();
             stmt.close();
@@ -128,63 +108,51 @@ public class StudentDAOImpl implements StudentDAO {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        return students;
+        return recruiters;
     } 
 
     @Override
-    public StudentBean findByName(String firstName, String lastName) {
-        String query = "SELECT * FROM LinkedU.Student s WHERE s.firstName = " + firstName + " and s.lastName = " + lastName;
-        StudentBean aStudent = new StudentBean();//loadStudentsFromDB(query);
-        return aStudent;
+    public RecruiterBean findByName(String firstName, String lastName) {
+        String query = "SELECT * FROM LinkedU.Recruiter s WHERE s.firstName = " + firstName + " and s.lastName = " + lastName;
+        RecruiterBean aRecruiter = new RecruiterBean();//loadRecruitersFromDB(query);
+        return aRecruiter;
     }
 
     @Override
     public ArrayList findByUserName(String userName){
-        ArrayList aStudentCollection = new ArrayList();
+        ArrayList aRecruiterCollection = new ArrayList();
         Connection DBConn = null;
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             String myDB = "jdbc:derby://localhost:1527/LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
-            String query = "SELECT * FROM LinkedU.Student WHERE USERNAME = ?";
+            String query = "SELECT * FROM LinkedU.Recruiter WHERE USERNAME = ?";
             PreparedStatement pstmt = DBConn.prepareStatement(query);
             pstmt.setString(1, userName); // replace the 1st ? with userID
             ResultSet rs = pstmt.executeQuery();
             
-            StudentBean student;
+            RecruiterBean recruiter;
             while (rs.next()) {
                 
                  //Same ordering as LinkedU.sql
-                String fN, lN, uN, hS, cU, uC, mC, e, a, gD, em, cS, pN, pNe;
-                int ACT, SAT;
-                double GPA;
+                String fN, lN, uN, u, em, cS, pN, pNe;
                 boolean aS;
 
                 fN = rs.getString("firstName");
                 lN = rs.getString("lastName");
                 uN = rs.getString("userName");
-                hS = rs.getString("highSchool");
-                cU = rs.getString("currentUniversity");
-                uC = rs.getString("universityChoices");
-                mC = rs.getString("majorChoices");
-                e = rs.getString("essays");
-                a = rs.getString("activities");
-                gD = rs.getString("graduationDate");
+                u = rs.getString("university");
                 em = rs.getString("email");
-                cS = rs.getString("currentState");
                 pN = rs.getString("phoneNumber");
                 pNe = rs.getString("phoneNetwork");
-                ACT = rs.getInt("ACTScores");
-                SAT = rs.getInt("SATScores");
-                GPA = rs.getDouble("GPA");
                 aS = rs.getBoolean("accountStatus");
 
-                // make a StudentBean object out of the values
-                student = new StudentBean(fN, lN, uN, hS, cU, uC, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe);
+                // make a RecruiterBean object out of the values
+                recruiter = new RecruiterBean(fN, lN, uN, u, aS, em, pN, pNe);
                 
                 // add the newly created object to the collection
-                aStudentCollection.add(student);
+                aRecruiterCollection.add(recruiter);
             }
             rs.close();
             pstmt.close();
@@ -197,6 +165,6 @@ public class StudentDAOImpl implements StudentDAO {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        return aStudentCollection;
+        return aRecruiterCollection;
     }
 }

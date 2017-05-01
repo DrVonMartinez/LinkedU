@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
@@ -30,9 +31,9 @@
                     </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
-                            <li><a href="faces/index.xhtml">HOME</a></li>
-                            <li><a class="btn-header" href="faces/signup.xhtml">Sign up</a></li>
-                            <li><a class="btn-header active" href="faces/login.xhtml">Sign in</a></li>
+                            <li><a href="index.xhtml">HOME</a></li>
+                            <li><a class="btn-header" href="signup.xhtml">Sign up</a></li>
+                            <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,10 +49,10 @@
                     </div>
     				<br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     <div class="span12 footer">
-                        <h:message for="userName" style="color: red;" />
                         <h:form id = "loginForm">
-                            <h:inputText id="userName" a:placeholder = "Username" value = "#{homeController.login.userName}"/>
-                            <h:inputText id="password" a:placeholder="Password" value = "#{homeController.login.passwordHash}"/>
+                            <h:message for="userName" style="color: red;" />
+                            <h:inputText id="userName" a:placeholder = "Username" value = "#{homeController.login.userName}" required="true" requiredMessage="Please enter Username" />
+                            <h:inputSecret redisplay="false" id="password" a:placeholder="Password" value = "#{homeController.login.passwordHash}" required="true" requiredMessage="Please enter Password"/>
                             <h:commandButton type="submit" value="Sign in" action = "#{homeController.loginUser()}"/>
                         </h:form>
                     </div>
