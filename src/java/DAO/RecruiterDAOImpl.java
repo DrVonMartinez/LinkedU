@@ -25,7 +25,7 @@ public class RecruiterDAOImpl implements RecruiterDAO {
 
         int rowCount = 0;
         try {
-            String myDB = "jdbc:derby://localhost:1527/LinkedU";// connection string, jdbc: java database connection
+            String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";// connection string, jdbc: java database connection
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
             String insertString;
             //String newFirstName = aUser.getFirstName().replace("'","''");
@@ -77,7 +77,7 @@ public class RecruiterDAOImpl implements RecruiterDAO {
 
         List<RecruiterBean> recruiters = new ArrayList<RecruiterBean>();
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/armalit_Sp2017_LinkedU";
+        String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
         RecruiterBean aRecruiter = null;
         try {
@@ -124,7 +124,7 @@ public class RecruiterDAOImpl implements RecruiterDAO {
         Connection DBConn = null;
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-            String myDB = "jdbc:derby://localhost:1527/LinkedU";
+            String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
             String query = "SELECT * FROM LinkedU.Recruiter WHERE USERNAME = ?";

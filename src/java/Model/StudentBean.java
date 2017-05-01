@@ -17,8 +17,6 @@ public class StudentBean extends GenericUserBean implements Serializable
     private String lastName;
     private String userName;
     private String highSchool;
-    private String currentUniversity;
-    private String universityChoices;
     private String majorChoices;
     private String essay;
     private String activities;
@@ -43,8 +41,6 @@ public class StudentBean extends GenericUserBean implements Serializable
         this.lastName = sb.lastName;
         this.userName = sb.userName;
         this.highSchool = sb.highSchool;
-        this.currentUniversity = sb.currentUniversity;
-        this.universityChoices = sb.universityChoices;
         this.majorChoices = sb.majorChoices;
         this.essay = sb.essay;
         this.activities = sb.activities;
@@ -60,13 +56,11 @@ public class StudentBean extends GenericUserBean implements Serializable
         this.students = sb.students;
     }
     
-    public StudentBean(String firstName, String lastName, String userName, String highSchool, String currentUniversity, String universityChoices, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, String graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork, ArrayList students) {
+    public StudentBean(String firstName, String lastName, String userName, String highSchool, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, String graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork, ArrayList students) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.highSchool = highSchool;
-        this.currentUniversity = currentUniversity;
-        this.universityChoices = universityChoices;
         this.majorChoices = majorChoices;
         this.essay = essay;
         this.activities = activities;
@@ -82,13 +76,11 @@ public class StudentBean extends GenericUserBean implements Serializable
         this.students = students;
     }
     
-    public StudentBean(String firstName, String lastName, String userName, String highSchool, String currentUniversity, String universityChoices, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, String graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork) {
+    public StudentBean(String firstName, String lastName, String userName, String highSchool, String majorChoices, String essay, String activities, int ACTScores, int SATScores, double GPA, String graduationDate, boolean accountStatus, String email, String currentState, String phoneNumber, String phoneNetwork) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.highSchool = highSchool;
-        this.currentUniversity = currentUniversity;
-        this.universityChoices = universityChoices;
         this.majorChoices = majorChoices;
         this.essay = essay;
         this.activities = activities;
@@ -133,22 +125,6 @@ public class StudentBean extends GenericUserBean implements Serializable
 
     public void setHighSchool(String highSchool) {
         this.highSchool = highSchool;
-    }
-
-    public String getCurrentUniversity() {
-        return currentUniversity;
-    }
-
-    public void setCurrentUniversity(String currentUniversity) {
-        this.currentUniversity = currentUniversity;
-    }
-
-    public String getUniversityChoices() {
-        return universityChoices;
-    }
-
-    public void setUniversityChoices(String universityChoices) {
-        this.universityChoices = universityChoices;
     }
 
     public String getMajorChoices() {
@@ -258,8 +234,6 @@ public class StudentBean extends GenericUserBean implements Serializable
             StudentBean aStu = (new StudentDAOImpl()).findByName(firstName, lastName);
             this.userName = aStu.userName;
             this.highSchool = aStu.highSchool;
-            this.currentUniversity = aStu.currentUniversity;
-            this.universityChoices = aStu.universityChoices;
             this.majorChoices = aStu.majorChoices;
             this.essay = aStu.essay;
             this.activities = aStu.activities;

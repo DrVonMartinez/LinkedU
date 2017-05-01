@@ -98,7 +98,14 @@ public class HomeController/* implements Serializable*/{
             int status = recruiterDAO.createRecruiter(recruiter, login);
             if (status == 1){
                 //JavaMailApp.sendUserCreationEmail(user);
-                welcomeSMS(1);
+                
+                
+                //uncomment this after
+                //welcomeSMS(1);
+                
+                
+                
+                
                 setLoggedIn(true);
                 return "index.xhtml?faces-redirect=true";
             }
@@ -265,7 +272,7 @@ public class HomeController/* implements Serializable*/{
     }
     
     
-    private void welcomeSMS(int messageType)
+    /*private void welcomeSMS(int messageType)
     {
         String host = "localhost", username = "admin", password = "abc123";
         int port = 9500;
@@ -295,5 +302,5 @@ public class HomeController/* implements Serializable*/{
         {
             System.out.print("An error has occurred\n" + other.getMessage());
         }
-    }
+    }*/
 }

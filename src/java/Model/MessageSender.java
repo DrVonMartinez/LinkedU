@@ -4,9 +4,9 @@
 package Model;
 import java.io.*;
 import java.util.*;
-import hu.ozeki.*;
+//import hu.ozeki.*;
 
-public class MessageSender extends OzSmsClient{
+/*public class MessageSender extends OzSmsClient{
 
         public MessageSender(String host, int port) throws IOException, InterruptedException {
                 super(host, port);
@@ -56,4 +56,4 @@ public class MessageSender extends OzSmsClient{
                 System.out.println(now.toString() + " Message code: " + errorCode +
                 ", Message: " + errorMessage);
         }
-}
+}*/
