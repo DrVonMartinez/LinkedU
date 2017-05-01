@@ -91,7 +91,7 @@ public class LoginDAOImpl implements LoginDAO{
                     if(rs.next()){
                         
                         //Same ordering as LinkedU.sql
-                        String fN, lN, uN, u, em, pN;
+                        String fN, lN, uN, u, em, pN, pNe;
                         boolean aS;
                         
                         fN = rs.getString("firstName");
@@ -100,10 +100,11 @@ public class LoginDAOImpl implements LoginDAO{
                         u = rs.getString("university");
                         em = rs.getString("email");
                         pN = rs.getString("phoneNumber");
+                        pNe = rs.getString("phoneNetwork");
                         aS = rs.getBoolean("accountStatus");
 
                         // make a RecruiterBean object out of the values
-                        user = new RecruiterBean(fN, lN, uN, u, aS, em, pN);
+                        user = new RecruiterBean(fN, lN, uN, u, aS, em, pN, pNe);
                     } else{
                         user = null;
                     }

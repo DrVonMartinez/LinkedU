@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+//import java.io.Serializable;
 
 /**
  *
@@ -23,7 +24,7 @@ import javax.faces.event.ComponentSystemEvent;
  */
 @ManagedBean
 @SessionScoped
-public class HomeController {
+public class HomeController/* implements Serializable*/{
     
     private GenericUserBean user;
     private StudentBean student;
@@ -31,14 +32,30 @@ public class HomeController {
     private LoginBean login;
     private boolean loggedIn;
     private ArrayList<String> accountTypes;
+    private ArrayList<String> phoneCarriers;
     
     public HomeController(){
         user = new GenericUserBean();
+        student = new StudentBean();
+        recruiter = new RecruiterBean();
         login = new LoginBean();
         loggedIn = false;
         accountTypes = new ArrayList<>();
         accountTypes.add("Student");
         accountTypes.add("Recruiter");
+        phoneCarriers = new ArrayList<>();
+        phoneCarriers.add("T-Mobile");
+        phoneCarriers.add("Virgin Mobile");
+        phoneCarriers.add("Cingular");
+        phoneCarriers.add("Sprint");
+        phoneCarriers.add("Verizon");
+        phoneCarriers.add("Nextel");
+        phoneCarriers.add("US Cellular");
+        phoneCarriers.add("SunCom");
+        phoneCarriers.add("Powertel");
+        phoneCarriers.add("AT&T");
+        phoneCarriers.add("Alltel");
+        phoneCarriers.add("Metro PCS");
     }
     
     public String isLogged(ComponentSystemEvent event){
@@ -68,51 +85,58 @@ public class HomeController {
         this.loggedIn = loggedIn;
     }
     
-    public String createUser(){
-        
-        if(getUser().getAccountType().equalsIgnoreCase("student")){
-            StudentDAO studentDAO = new StudentDAOImpl();    // Creating a new object each time.
-            getLogin().setUserName(getStudent().getUserName());
-            setUser(new StudentBean(getStudent()));
-            ArrayList existingUser = studentDAO.findByUserName(getStudent().getUserName());
+    public String createRecruiter(){
+        RecruiterDAO recruiterDAO = new RecruiterDAOImpl();    // Creating a new object each time.
+            login.setUserName(recruiter.getUserName());
+            //student = new StudentBean(getStudent());
+            ArrayList existingUser = recruiterDAO.findByUserName(recruiter.getUserName());
             if(!existingUser.isEmpty()){   //User exists in DB already
                 FacesMessage message = new FacesMessage("This Username already exists");
-                FacesContext.getCurrentInstance().addMessage("signupForm:userName", message);
+                FacesContext.getCurrentInstance().addMessage("recruiterSignupForm:recUserName", message);
                 return null;//"signUp.xhtml?faces-redirect=true";
             }
-            int status = studentDAO.createStudent(getStudent(), getLogin());
+            int status = recruiterDAO.createRecruiter(recruiter, login);
             if (status == 1){
                 //JavaMailApp.sendUserCreationEmail(user);
                 setLoggedIn(true);
                 return "index.xhtml?faces-redirect=true";
             }
             else{
+                System.out.println("db status return isnt 1: " + status);
                 return null;
             }
-        } else if(getUser().getAccountType().equalsIgnoreCase("recruiter")){
-            //
-            /*StudentDAO studentDAO = new StudentDAOImpl();    // Creating a new object each time.
+    }
+    
+    public String createStudent(){
+        
+        //if(login.getAccountType().equalsIgnoreCase("student")){
+            StudentDAO studentDAO = new StudentDAOImpl();    // Creating a new object each time.
             login.setUserName(student.getUserName());
-            user = new StudentBean(student);
+            //student = new StudentBean(getStudent());
             ArrayList existingUser = studentDAO.findByUserName(student.getUserName());
             if(!existingUser.isEmpty()){   //User exists in DB already
                 FacesMessage message = new FacesMessage("This Username already exists");
-                FacesContext.getCurrentInstance().addMessage("signupForm:userName", message);
+                FacesContext.getCurrentInstance().addMessage("sstudentSignupForm:stuUserName", message);
+                //System.out.println("studetn already exists");
                 return null;//"signUp.xhtml?faces-redirect=true";
             }
             int status = studentDAO.createStudent(student, login);
             if (status == 1){
                 //JavaMailApp.sendUserCreationEmail(user);
-                loggedIn = true;
+                setLoggedIn(true);
                 return "index.xhtml?faces-redirect=true";
             }
             else{
+                System.out.println("db status return isnt 1");
                 return null;
-            }*/
-        } else if(getUser().getAccountType().equalsIgnoreCase("admin")){
+            }
+        //} else if(user.getAccountType().equalsIgnoreCase("recruiter")){
+            
+        /*} else if(getUser().getAccountType().equalsIgnoreCase("admin")){
             
         }
-        return null;    //remove this later
+        System.out.println("user.accountType didn't match");*/
+        //return null;    //remove this later
     }
     
     public String loginUser(){
@@ -209,6 +233,34 @@ public class HomeController {
      */
     public void setAccountTypes(ArrayList<String> accountTypes) {
         this.accountTypes = accountTypes;
+    }
+
+    /**
+     * @return the phoneCarriers
+     */
+    public ArrayList<String> getPhoneCarriers() {
+        return phoneCarriers;
+    }
+
+    /**
+     * @param phoneCarriers the phoneCarriers to set
+     */
+    public void setPhoneCarriers(ArrayList<String> phoneCarriers) {
+        this.phoneCarriers = phoneCarriers;
+    }
+    
+    public ArrayList<String> getUniversities(){
+        
+        
+        
+        //Access UniversityDAO to get full list of active universities
+        
+        //this for temporary use.
+        ArrayList<String> u = new ArrayList();
+        u.add("University of Illinois");
+        u.add("Illinois State University");
+        
+        return u;
     }
     
     
