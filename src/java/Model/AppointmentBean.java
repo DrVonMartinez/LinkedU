@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Model;
+import java.util.Calendar;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,7 +17,8 @@ import javax.faces.bean.SessionScoped;
 public class AppointmentBean {
     private StudentBean student;
     private String university;
-    private Date date;
+    private Calendar date;
+    private String time;
 
     /**
      * @return the student
@@ -49,15 +51,29 @@ public class AppointmentBean {
     /**
      * @return the date
      */
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
+    }
+
+    /**
+     * @return the time
+     */
+    public String getTime() {
+        return time;
+    }
+
+    /**
+     * @param time the time to set
+     */
+    public void setTime(String time) {
+        this.time = time;
     }
     
 }

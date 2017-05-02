@@ -4,21 +4,20 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core">
-    <head>
+    <h:head>
         <title>LinkedU</title>
-
         <!-- Styles -->
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
         <link href="css/bootstrap-overrides.css" rel="stylesheet"/>
         <link rel="stylesheet" type="text/css" href="css/theme.css"/>
+        <link rel="stylesheet" href="css/sign-in.css" type="text/css" media="screen" />
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'/>
 
         <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection"/>
-        <link rel="stylesheet" href="css/sign-in.css" type="text/css" media="screen" />
-    </head>
+    </h:head>
     <f:event listener="#{homeController.isLogged}" type="preRenderView" />
-    <h:body>
+    <h:body style="padding-top:0px;">
         <div class="navbar navbar-inverse navbar-static-top">
             <div class="navbar-inner">
                 <div class="container">
@@ -41,20 +40,47 @@
                                 <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
                             </h:panelGroup>
                             <h:panelGroup rendered="#{homeController.loggedIn}">
-                                <h:form>
-                                    <li><a class="btn-header"><h:commandLink action="#{homeController.logout()}">Log out</h:commandLink></a></li>
-                                </h:form>
-                                <!--<li><a class="btn-header" href="login.xhtml">Log out</a></li>-->
+                                <li><h:form>
+                                    <h:commandLink class="btn-header" action="#{homeController.logout()}">Log out</h:commandLink>
+                                </h:form></li>
+                            <!--<li><a class="btn-header" href="login.xhtml">Log out</a></li>-->
                             </h:panelGroup>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <h2>Schedule an Appointment with a University</h2><br/>
-        <h:form id="apptForm">
-            
-        </h:form>
+        <div id="sign_in1">
+            <div class="container">
+                <div class="row">
+                    <div class="span12 header" style="margin-bottom:20px;">
+                        <h4>Schedule an Appointment with a University</h4>
+                    </div>
+                    <div class="span12 footer" style="box-shadow: 0 0 5px 0 rgb(238, 238, 238);background: white;border:1px solid #DFDFDF;border-radius: 5px;width: 90%;padding: 35px 0 30px;">
+                        <h:form id="apptForm">
+                            University: <h:selectOneMenu id="university" value="#{homeController.appt.university}">
+                                <f:selectItems value="#{homeController.getUniversities()}" />
+                            </h:selectOneMenu><br/><br/>
+                            Date: <h:inputText id="date" value="#{homeController.appt.date}" a:placeholder="MM/dd/yyyy">
+                                <f:converter converterId="CustomCalendarConverter" />
+                                <f:attribute name="pattern" value="MM/dd/yyyy" />
+                            </h:inputText><br/><br/>
+                            Time: <h:selectOneMenu id="timeOfDay" value="#{homeController.appt.time}">
+                                <f:selectItem itemValue = "9:00 AM" itemLabel = "9:00 AM" />
+                                <f:selectItem itemValue = "10:00 AM" itemLabel = "10:00 AM" />
+                                <f:selectItem itemValue = "11:00 AM" itemLabel = "11:00 AM" />
+                                <f:selectItem itemValue = "12:00 PM" itemLabel = "12:00 PM" />
+                                <f:selectItem itemValue = "1:00 PM" itemLabel = "1:00 PM" />
+                                <f:selectItem itemValue = "2:00 PM" itemLabel = "2:00 PM" />
+                                <f:selectItem itemValue = "3:00 PM" itemLabel = "3:00 PM" />
+                                <f:selectItem itemValue = "4:00 PM" itemLabel = "4:00 PM" />
+                            </h:selectOneMenu><br/><br/>
+                            <h:commandButton id="SubmitID" value="Submit" action="#{homeController.scheduleAppt()}"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </h:body>
 </html>

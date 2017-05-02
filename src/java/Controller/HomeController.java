@@ -32,6 +32,7 @@ public class HomeController/* implements Serializable*/{
     private StudentBean student;
     private RecruiterBean recruiter;
     private LoginBean login;
+    private AppointmentBean appt;
     private boolean loggedIn;
     private ArrayList<String> accountTypes;
     private List<String> phoneCarriers;
@@ -41,6 +42,7 @@ public class HomeController/* implements Serializable*/{
         student = new StudentBean();
         recruiter = new RecruiterBean();
         login = new LoginBean();
+        appt = new AppointmentBean();
         loggedIn = false;
         accountTypes = new ArrayList<>();
         accountTypes.add("Student");
@@ -93,12 +95,7 @@ public class HomeController/* implements Serializable*/{
         int status = recruiterDAO.createRecruiter(recruiter, login);
         if (status == 1){
             //JavaMailApp.sendUserCreationEmail(user);
-
-
-            //uncomment this after
-            //welcomeSMS(1);
-
-
+            welcomeSMS(2);
             setLoggedIn(true);
             return "index.xhtml?faces-redirect=true";
         }
@@ -123,6 +120,7 @@ public class HomeController/* implements Serializable*/{
         int status = studentDAO.createStudent(student, login);
         if (status == 1){
             //JavaMailApp.sendUserCreationEmail(user);
+            welcomeSMS(1);
             setLoggedIn(true);
             return "index.xhtml?faces-redirect=true";
         }
@@ -162,6 +160,13 @@ public class HomeController/* implements Serializable*/{
             FacesContext.getCurrentInstance().addMessage("loginForm:userName", message); // <p><h:message for="userName" style="color: red;" /></p>
             return null;
         }
+    }
+    
+    public String scheduleAppt(){
+        appt.setStudent(new StudentBean(this.student));
+        JavaMailApp.scheduleAppointmentEmail(appt);
+        appt = new AppointmentBean();
+        return "index.xhtml?faces-redirect=true";
     }
 
     /**
@@ -239,7 +244,8 @@ public class HomeController/* implements Serializable*/{
      * @return the phoneCarriers
      */
     public List<String> getPhoneCarriers() {
-        phoneCarriers = Model.TextMessageWriter.getCarriers();
+        //phoneCarriers = Model.TextMessageWriter.getCarriers();
+        phoneCarriers = new ArrayList<>();
         return phoneCarriers;
     }
 
@@ -251,9 +257,6 @@ public class HomeController/* implements Serializable*/{
     }
     
     public ArrayList<String> getUniversities(){
-        
-        
-        
         //Access UniversityDAO to get full list of active universities
         
         //this for temporary use.
@@ -282,5 +285,19 @@ public class HomeController/* implements Serializable*/{
             name = getRecruiter().getFirstName() +" "+ getRecruiter().getLastName();
             Model.TextMessageWriter.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU " + name + "!");
         }
+    }
+
+    /**
+     * @return the appt
+     */
+    public AppointmentBean getAppt() {
+        return appt;
+    }
+
+    /**
+     * @param appt the appt to set
+     */
+    public void setAppt(AppointmentBean appt) {
+        this.appt = appt;
     }
 }
