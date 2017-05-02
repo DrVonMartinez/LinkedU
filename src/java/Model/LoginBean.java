@@ -28,11 +28,19 @@ public class LoginBean{
     public LoginBean(){
         userName = null;
         passwordHash = null;
+        accountType = null;
+    }
+    
+    public LoginBean(String userName, String password, String accountType){
+        this.userName = userName;
+        passwordHash = generateHash(SALT + password);
+        this.accountType = accountType;
     }
     
     public LoginBean(String userName, String password){
         this.userName = userName;
         passwordHash = generateHash(SALT + password);
+        accountType = null;
     }
     /**
      * @return the userName

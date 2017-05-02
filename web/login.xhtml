@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/lib/animate.css" media="screen, projection"/>
     <link rel="stylesheet" href="css/sign-in.css" type="text/css" media="screen" />
     </head>
-    <body>
+    <h:body>
         <div class="navbar navbar-inverse navbar-static-top">
             <div class="navbar-inner">
                 <div class="container">
@@ -32,8 +32,19 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li><a href="index.xhtml">HOME</a></li>
-                            <li><a class="btn-header" href="signup.xhtml">Sign up</a></li>
-                            <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
+                            <h:panelGroup rendered="#{homeController.studentLoggedIn()}">
+                                <li><a class="btn-header" href="scheduleAppt.xhtml">Schedule Appointment</a></li>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{!homeController.loggedIn}">
+                                <li><a class="btn-header" href="signup.xhtml">Sign up</a></li>
+                                <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{homeController.loggedIn}">
+                                <h:form>
+                                    <li><a class="btn-header"><h:commandLink action="#{homeController.logout()}">Log out</h:commandLink></a></li>
+                                </h:form>
+                                <!--<li><a class="btn-header" href="login.xhtml">Log out</a></li>-->
+                            </h:panelGroup>
                         </ul>
                     </div>
                 </div>
@@ -67,5 +78,5 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
-    </body>
+    </h:body>
 </html>

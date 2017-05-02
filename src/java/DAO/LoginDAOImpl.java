@@ -41,8 +41,9 @@ public class LoginDAOImpl implements LoginDAO{
             if(rs.next()) { //login successful
                 
                 accountType = rs.getString("AccountType");
+                aLogin.setAccountType(accountType);
                 
-                if(accountType.equalsIgnoreCase("student")){
+                if(accountType.equalsIgnoreCase("Student")){
                     //user = new StudentBean();
                     query = "SELECT * FROM LinkedU.Student WHERE USERNAME = ?";
                     pstmt = DBConn.prepareStatement(query);
@@ -62,7 +63,7 @@ public class LoginDAOImpl implements LoginDAO{
                         uN = rs.getString("userName");
                         hS = rs.getString("highSchool");
                         mC = rs.getString("majorChoices");
-                        e = rs.getString("essays");
+                        e = rs.getString("essay");
                         a = rs.getString("activities");
                         gD = rs.getString("graduationDate");
                         em = rs.getString("email");
@@ -76,11 +77,12 @@ public class LoginDAOImpl implements LoginDAO{
 
                         // make a StudentBean object out of the values
                         user = new StudentBean(fN, lN, uN, hS, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe, null);
+                        user.setAccountType(accountType);
                     } else{
                         user = null;
                     }
                     
-                } else if(accountType.equalsIgnoreCase("recruiter")){
+                } else if(accountType.equalsIgnoreCase("Recruiter")){
                     query = "SELECT * FROM LinkedU.Recruiter WHERE USERNAME = ?";
                     pstmt = DBConn.prepareStatement(query);
                     pstmt.setString(1, aLogin.getUserName()); // replace the 1st ? with userID
@@ -103,6 +105,7 @@ public class LoginDAOImpl implements LoginDAO{
 
                         // make a RecruiterBean object out of the values
                         user = new RecruiterBean(fN, lN, uN, u, aS, em, pN, pNe);
+                        user.setAccountType(accountType);
                     } else{
                         user = null;
                     }
