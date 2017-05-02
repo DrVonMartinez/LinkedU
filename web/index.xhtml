@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>LinkedU</title>
-    <!-- Styles -->
+        <!-- Styles -->
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>
         <link href="css/bootstrap-overrides.css" rel="stylesheet"/>
@@ -28,10 +28,21 @@
                 <strong>LinkedU</strong>
             </a>
             <div class="nav-collapse collapse">
-                <ul class="nav pull-right">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a class="btn-header" href="sign-up.html">Sign up</a></li>
-                    <li><a class="btn-header active" href="sign-in.html">Sign in</a></li>
+                <ul class="nav pull-right">S
+                    <li><a href="index.xhtml">HOME</a></li>
+                    <h:panelGroup rendered="#{homeController.studentLoggedIn()}">
+                        <li><a class="btn-header" href="scheduleAppt.xhtml">Schedule Appointment</a></li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!homeController.loggedIn}">
+                        <li><a class="btn-header" href="signup.xhtml">Sign up</a></li>
+                        <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{homeController.loggedIn}">
+                        <li><h:form>
+                            <h:commandLink class="btn-header" action="#{homeController.logout()}">Log out</h:commandLink>
+                        </h:form></li>
+                    <!--<li><a class="btn-header" href="login.xhtml">Log out</a></li>-->
+                    </h:panelGroup>
                 </ul>
             </div>
         </div>
@@ -92,7 +103,7 @@
                     <div class="span4 feature first">
                         <div class="img_box">
                             <a href="services.html">
-                                <img src="img/service1.png">
+                                <img src="img/service1.png" />
                                 <span class="circle"> 
                                     <span class="plus">&#43;</span>
                                 </span>

@@ -30,7 +30,7 @@ public class StudentDAOImpl implements StudentDAO {
             String insertString;
             //String newFirstName = aUser.getFirstName().replace("'","''");
             //String newLastName = aUser.getLastName().replace("'","''");
-            insertString = "INSERT INTO LinkedU.Student VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            insertString = "INSERT INTO LinkedU.Student VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = DBConn.prepareStatement(insertString);
             
@@ -59,7 +59,7 @@ public class StudentDAOImpl implements StudentDAO {
             
             pstmt.setString(1, aLogin.getUserName());
             pstmt.setString(2, aLogin.getPasswordHash());
-            pstmt.setString(2, aLogin.getAccountType());
+            pstmt.setString(3, aLogin.getAccountType());
 
             
             pstmt.executeUpdate();

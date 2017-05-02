@@ -625,3 +625,32 @@
     }
 }
 
+.navbar .nav>li>form>a {
+    float: none;
+    padding: 10px 15px 10px;
+    color: #777;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+}
+.navbar-inverse .nav > li > form {
+    margin: 0;
+}
+.navbar-inverse .nav > li > form > a {
+    /*color: rgb(177, 177, 177);*/
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    opacity: .6;
+    filter: alpha(opacity=60);
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    transition: all .2s linear;
+}
+.navbar-inverse .nav > li > form > a:hover,
+.navbar-inverse .nav > li > form > a.active {
+    color: #fff;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}

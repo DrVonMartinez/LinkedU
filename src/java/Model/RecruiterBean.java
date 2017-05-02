@@ -20,6 +20,7 @@ public class RecruiterBean extends GenericUserBean{
     
     public RecruiterBean(){
     }
+    
     public RecruiterBean(String firstName, String lastName, String userName, String university, boolean accountStatus, String email, String phoneNumber, String phoneNetwork)
     {
         this.firstName = firstName;
@@ -31,6 +32,19 @@ public class RecruiterBean extends GenericUserBean{
         this.phoneNumber = phoneNumber;
         this.phoneNetwork = phoneNetwork;        
     }
+    
+    public RecruiterBean(RecruiterBean rb)
+    {
+        this.firstName = rb.getFirstName();
+        this.lastName = rb.getLastName();
+        this.userName = rb.getUserName();
+        this.university = rb.getUniversity();
+        this.accountStatus = rb.isAccountStatus();
+        this.email = rb.getEmail();
+        this.phoneNumber = rb.getPhoneNumber();
+        this.phoneNetwork = rb.getPhoneNetwork();        
+    }
+    
     public String getFirstName() {
         return firstName;
     }

@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import javax.servlet.http.HttpSession;
 //import java.io.Serializable;
 
 /**
@@ -85,84 +86,87 @@ public class HomeController/* implements Serializable*/{
         this.loggedIn = loggedIn;
     }
     
+    public String logout(){
+        loggedIn = false;
+        ((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false)).invalidate();
+        return "login.xhtml?faces-redirect=true";
+    }
+    
     public String createRecruiter(){
-        RecruiterDAO recruiterDAO = new RecruiterDAOImpl();    // Creating a new object each time.
-            login.setUserName(recruiter.getUserName());
-            //student = new StudentBean(getStudent());
-            ArrayList existingUser = recruiterDAO.findByUserName(recruiter.getUserName());
-            if(!existingUser.isEmpty()){   //User exists in DB already
-                FacesMessage message = new FacesMessage("This Username already exists");
-                FacesContext.getCurrentInstance().addMessage("recruiterSignupForm:recUserName", message);
-                return null;//"signUp.xhtml?faces-redirect=true";
-            }
-            int status = recruiterDAO.createRecruiter(recruiter, login);
-            if (status == 1){
-                //JavaMailApp.sendUserCreationEmail(user);
-                
-                
-                //uncomment this after
-                //welcomeSMS(1);
-                
-                
-                
-                
-                setLoggedIn(true);
-                return "index.xhtml?faces-redirect=true";
-            }
-            else{
-                System.out.println("db status return isnt 1: " + status);
-                return null;
-            }
+        RecruiterDAO recruiterDAO = new RecruiterDAOImpl();   
+        login.setUserName(recruiter.getUserName());
+        login.setAccountType("Recruiter");
+
+        ArrayList existingUser = recruiterDAO.findByUserName(recruiter.getUserName());
+        if(!existingUser.isEmpty()){   //User exists in DB already
+            FacesMessage message = new FacesMessage("This Username already exists");
+            FacesContext.getCurrentInstance().addMessage("recruiterSignupForm:recUserName", message);
+            return null;//"signUp.xhtml?faces-redirect=true";
+        }
+        int status = recruiterDAO.createRecruiter(recruiter, login);
+        if (status == 1){
+            //JavaMailApp.sendUserCreationEmail(user);
+
+
+            //uncomment this after
+            //welcomeSMS(1);
+
+
+            setLoggedIn(true);
+            return "index.xhtml?faces-redirect=true";
+        }
+        else{
+            System.out.println("db status return isnt 1: " + status);
+            return null;
+        }
     }
     
     public String createStudent(){
         
-        //if(login.getAccountType().equalsIgnoreCase("student")){
-            StudentDAO studentDAO = new StudentDAOImpl();    // Creating a new object each time.
-            login.setUserName(student.getUserName());
-            //student = new StudentBean(getStudent());
-            ArrayList existingUser = studentDAO.findByUserName(student.getUserName());
-            if(!existingUser.isEmpty()){   //User exists in DB already
-                FacesMessage message = new FacesMessage("This Username already exists");
-                FacesContext.getCurrentInstance().addMessage("sstudentSignupForm:stuUserName", message);
-                //System.out.println("studetn already exists");
-                return null;//"signUp.xhtml?faces-redirect=true";
-            }
-            int status = studentDAO.createStudent(student, login);
-            if (status == 1){
-                //JavaMailApp.sendUserCreationEmail(user);
-                setLoggedIn(true);
-                return "index.xhtml?faces-redirect=true";
-            }
-            else{
-                System.out.println("db status return isnt 1");
-                return null;
-            }
-        //} else if(user.getAccountType().equalsIgnoreCase("recruiter")){
-            
-        /*} else if(getUser().getAccountType().equalsIgnoreCase("admin")){
-            
+        StudentDAO studentDAO = new StudentDAOImpl();
+        login.setUserName(student.getUserName());
+        login.setAccountType("Student");
+        ArrayList existingUser = studentDAO.findByUserName(student.getUserName());
+        if(!existingUser.isEmpty()){   //User exists in DB already
+            FacesMessage message = new FacesMessage("This Username already exists");
+            FacesContext.getCurrentInstance().addMessage("studentSignupForm:stuUserName", message);
+            //System.out.println("student already exists");
+            return null;//"signUp.xhtml?faces-redirect=true";
         }
-        System.out.println("user.accountType didn't match");*/
-        //return null;    //remove this later
+        int status = studentDAO.createStudent(student, login);
+        if (status == 1){
+            //JavaMailApp.sendUserCreationEmail(user);
+            setLoggedIn(true);
+            return "index.xhtml?faces-redirect=true";
+        }
+        else{
+            System.out.println("db status return isnt 1");
+            return null;
+        }
+        
+    }
+    
+    public boolean studentLoggedIn(){
+        if(login == null || login.getAccountType() == null) return false;
+        return loggedIn && (login.getAccountType().equals("Student"));
     }
 
     public String loginUser() {
         LoginDAO aLoginDAO = new LoginDAOImpl();
         setUser(aLoginDAO.authenticateUser(getLogin()));
         if (getUser() != null) {
+            switch (user.getAccountType()) {
+                case "Student":
+                    student = new StudentBean((StudentBean)user);
+                    login.setAccountType("Student");
+                    break;
+                case "Recruiter":
+                    recruiter = new RecruiterBean((RecruiterBean)user);
+                    login.setAccountType("Recruiter");
+                    break;
+            }
             setLoggedIn(true);
             return "index.xhtml?faces-redirect=true";
-
-            //Use this to redirect to different pages after login
-            /*if(user instanceof StudentBean){
-             //redirect to student page
-             } else if(user instanceof RecruiterBean){
-             //redirect to recruiter page
-             } else if(user instanceof AdminBean){
-             //redirect to admin page
-             }
-             return "index.xhtml?faces-redirect=true";*/
         } else {
             setLoggedIn(false);
             //return to login and add error message
