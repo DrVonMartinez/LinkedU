@@ -25,6 +25,7 @@ public class UniversityBean
     public UniversityBean(){
         
     }
+    
     public UniversityBean(int id, String universityName, String USState, String picture, String bio, double idealGPA, int idealACT, int idealSAT, String websiteLink, String applicationLink, boolean highlighted, String notableMajors, int timeSubscribed)
     {
         this.id = id;
@@ -223,5 +224,22 @@ public class UniversityBean
     public void setTimeSubscribed(int timeSubscribed) {
         this.timeSubscribed = timeSubscribed;
     }
+ 
+    public String formatMajors()
+    {
+        String list ="";
+        String[] brokenMajors = notableMajors.split(";");
+        for(String i: brokenMajors)
+        {
+            list+=i;
+        }
+        return list;
+    }
     
+    public String formatAcademics()
+    {
+        String academics="";
+        academics += "GPA: " + idealGPA + "<br/>ACT: " + idealACT + "<br/>SAT" + idealSAT;
+        return academics;
+    }
 }
