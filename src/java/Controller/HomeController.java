@@ -34,8 +34,8 @@ public class HomeController/* implements Serializable*/{
     private LoginBean login;
     private boolean loggedIn;
     private ArrayList<String> accountTypes;
-    private ArrayList<String> phoneCarriers;
-    
+    private List<String> phoneCarriers;
+            
     public HomeController(){
         user = new GenericUserBean();
         student = new StudentBean();
@@ -45,19 +45,6 @@ public class HomeController/* implements Serializable*/{
         accountTypes = new ArrayList<>();
         accountTypes.add("Student");
         accountTypes.add("Recruiter");
-        phoneCarriers = new ArrayList<>();
-        phoneCarriers.add("T-Mobile");
-        phoneCarriers.add("Virgin Mobile");
-        phoneCarriers.add("Cingular");
-        phoneCarriers.add("Sprint");
-        phoneCarriers.add("Verizon");
-        phoneCarriers.add("Nextel");
-        phoneCarriers.add("US Cellular");
-        phoneCarriers.add("SunCom");
-        phoneCarriers.add("Powertel");
-        phoneCarriers.add("AT&T");
-        phoneCarriers.add("Alltel");
-        phoneCarriers.add("Metro PCS");
     }
 
     public String isLogged(ComponentSystemEvent event) {
@@ -219,6 +206,7 @@ public class HomeController/* implements Serializable*/{
         this.recruiter = recruiter;
     }
 
+    
     /**
      * @return the login
      */
@@ -236,7 +224,7 @@ public class HomeController/* implements Serializable*/{
     /**
      * @return the accountTypes
      */
-    public ArrayList<String> getAccountTypes() {
+    public List<String> getAccountTypes() {
         return accountTypes;
     }
 
@@ -250,14 +238,15 @@ public class HomeController/* implements Serializable*/{
     /**
      * @return the phoneCarriers
      */
-    public ArrayList<String> getPhoneCarriers() {
+    public List<String> getPhoneCarriers() {
+        phoneCarriers = Model.TextMessageWriter.getCarriers();
         return phoneCarriers;
     }
 
     /**
      * @param phoneCarriers the phoneCarriers to set
      */
-    public void setPhoneCarriers(ArrayList<String> phoneCarriers) {
+    public void setPhoneCarriers(List<String> phoneCarriers) {
         this.phoneCarriers = phoneCarriers;
     }
     
@@ -276,35 +265,22 @@ public class HomeController/* implements Serializable*/{
     }
     
     
-    /*private void welcomeSMS(int messageType)
+    private void welcomeSMS(int messageType)
     {
-        String host = "localhost", username = "admin", password = "abc123";
-        int port = 9500;
-        MessageSender userMessageSender = null;
-        try {
-            userMessageSender = new MessageSender(host, port);
-            userMessageSender.login(username, password);
-            if (messageType ==1 && userMessageSender.isLoggedIn())
-            {
-                String studentMessage = "Welcome to LinkedU " + getStudent().getFirstName() + "!"; 
-                userMessageSender.sendMessage("+1" + (getStudent().getPhoneNumber()), studentMessage);
-            }    
-            else if(messageType == 2 && userMessageSender.isLoggedIn())
-            {
-                String recruiterMessage = "Welcome to LinkedU " + getRecruiter().getFirstName() + "!"; 
-                userMessageSender.sendMessage("+1" + (getRecruiter().getPhoneNumber()), recruiterMessage);
-            }
-        } 
-        catch (IOException | InterruptedException e) {
-            System.out.println("Error Connecting to Messaging Service \n" + e.getMessage());
-        }
-        catch(NullPointerException npe)
+        String cellPhoneNetwork, cellPhoneNumber, name;
+        if(messageType ==1)
         {
-            System.out.print("Message delivery failed\n" + npe.getMessage()); 
+            cellPhoneNetwork = getStudent().getPhoneNetwork();
+            cellPhoneNumber = getStudent().getPhoneNumber();
+            name = getStudent().getFirstName() +" "+ getStudent().getLastName();
+            Model.TextMessageWriter.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU " + name + "!");
         }
-        catch(Exception other)
+        else if(messageType == 2)
         {
-            System.out.print("An error has occurred\n" + other.getMessage());
+            cellPhoneNetwork = getRecruiter().getPhoneNetwork();
+            cellPhoneNumber = getRecruiter().getPhoneNumber();
+            name = getRecruiter().getFirstName() +" "+ getRecruiter().getLastName();
+            Model.TextMessageWriter.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU " + name + "!");
         }
-    }*/
+    }
 }
