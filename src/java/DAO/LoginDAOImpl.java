@@ -26,7 +26,7 @@ public class LoginDAOImpl implements LoginDAO{
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             // if doing the above in Oracle: DBHelper.loadDriver("oracle.jdbc.driver.OracleDriver");
-            String myDB = "jdbc:derby://localhost:1527/LinkedU";
+            String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             // if doing the above in Oracle:  String myDB = "jdbc:oracle:thin:@oracle.itk.ilstu.edu:1521:ora478";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
         
@@ -61,8 +61,6 @@ public class LoginDAOImpl implements LoginDAO{
                         lN = rs.getString("lastName");
                         uN = rs.getString("userName");
                         hS = rs.getString("highSchool");
-                        cU = rs.getString("currentUniversity");
-                        uC = rs.getString("universityChoices");
                         mC = rs.getString("majorChoices");
                         e = rs.getString("essays");
                         a = rs.getString("activities");
@@ -77,7 +75,7 @@ public class LoginDAOImpl implements LoginDAO{
                         aS = rs.getBoolean("accountStatus");
 
                         // make a StudentBean object out of the values
-                        user = new StudentBean(fN, lN, uN, hS, cU, uC, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe, null);
+                        user = new StudentBean(fN, lN, uN, hS, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe, null);
                     } else{
                         user = null;
                     }

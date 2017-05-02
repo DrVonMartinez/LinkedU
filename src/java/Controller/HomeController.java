@@ -248,7 +248,7 @@ public class HomeController/* implements Serializable*/{
     }
     
     
-    private void welcomeSMS(int messageType)
+    /*private void welcomeSMS(int messageType)
     {
         String cellPhoneNetwork = null;
         String cellPhoneNumber = null;
@@ -267,5 +267,5 @@ public class HomeController/* implements Serializable*/{
             name = getRecruiter().getFirstName() +" "+ getRecruiter().getLastName();
             model.TextMessageSender.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU" + name + "!");
         }
-    }
+    }*/
 }

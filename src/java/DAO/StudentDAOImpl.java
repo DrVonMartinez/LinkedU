@@ -25,7 +25,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         int rowCount = 0;
         try {
-            String myDB = "jdbc:derby://localhost:1527/LinkedU";// connection string, jdbc: java database connection
+            String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";// connection string, jdbc: java database connection
             Connection DBConn = DriverManager.getConnection(myDB, "itkstu", "student");
             String insertString;
             //String newFirstName = aUser.getFirstName().replace("'","''");
@@ -38,20 +38,18 @@ public class StudentDAOImpl implements StudentDAO {
             pstmt.setString(2, aStudent.getLastName());
             pstmt.setString(3, aStudent.getUserName());
             pstmt.setString(4, aStudent.getHighSchool());
-            pstmt.setString(5, aStudent.getCurrentUniversity());
-            pstmt.setString(6, aStudent.getUniversityChoices());
-            pstmt.setString(7, aStudent.getMajorChoices());
-            pstmt.setString(8, aStudent.getEssay());
-            pstmt.setString(9, aStudent.getActivities());
-            pstmt.setInt(10, aStudent.getACTScores());
-            pstmt.setInt(11, aStudent.getSATScores());
-            pstmt.setDouble(12, aStudent.getGPA());
-            pstmt.setString(13, aStudent.getGraduationDate());
-            pstmt.setBoolean(14, aStudent.isAccountStatus());
-            pstmt.setString(15, aStudent.getEmail());
-            pstmt.setString(16, aStudent.getCurrentState());
-            pstmt.setString(17, aStudent.getPhoneNumber());
-            pstmt.setString(18, aStudent.getPhoneNetwork());
+            pstmt.setString(5, aStudent.getMajorChoices());
+            pstmt.setString(6, aStudent.getEssay());
+            pstmt.setString(7, aStudent.getActivities());
+            pstmt.setInt(8, aStudent.getACTScores());
+            pstmt.setInt(9, aStudent.getSATScores());
+            pstmt.setDouble(10, aStudent.getGPA());
+            pstmt.setString(11, aStudent.getGraduationDate());
+            pstmt.setBoolean(12, aStudent.isAccountStatus());
+            pstmt.setString(13, aStudent.getEmail());
+            pstmt.setString(14, aStudent.getCurrentState());
+            pstmt.setString(15, aStudent.getPhoneNumber());
+            pstmt.setString(16, aStudent.getPhoneNetwork());
             
             rowCount = pstmt.executeUpdate();
             
@@ -87,7 +85,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         List<StudentBean> students = new ArrayList<StudentBean>();
         DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-        String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/armalit_Sp2017_LinkedU";
+        String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
         Connection DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
         StudentBean aStudent = null;
         try {
@@ -100,8 +98,6 @@ public class StudentDAOImpl implements StudentDAO {
                 stu.setLastName(rs.getString("lastName"));
                 stu.setUserName(rs.getString("userName"));
                 stu.setHighSchool(rs.getString("highSchool"));
-                stu.setCurrentUniversity(rs.getString("lastName"));
-                stu.setUniversityChoices(rs.getString("universityChoices"));
                 stu.setMajorChoices(rs.getString("majorChoices"));
                 stu.setEssay(rs.getString("essay"));
                 stu.setActivities(rs.getString("activities"));
@@ -144,7 +140,7 @@ public class StudentDAOImpl implements StudentDAO {
         Connection DBConn = null;
         try {
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
-            String myDB = "jdbc:derby://localhost:1527/LinkedU";
+            String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
 
             String query = "SELECT * FROM LinkedU.Student WHERE USERNAME = ?";
@@ -156,7 +152,7 @@ public class StudentDAOImpl implements StudentDAO {
             while (rs.next()) {
                 
                  //Same ordering as LinkedU.sql
-                String fN, lN, uN, hS, cU, uC, mC, e, a, gD, em, cS, pN, pNe;
+                String fN, lN, uN, hS, mC, e, a, gD, em, cS, pN, pNe;
                 int ACT, SAT;
                 double GPA;
                 boolean aS;
@@ -165,8 +161,6 @@ public class StudentDAOImpl implements StudentDAO {
                 lN = rs.getString("lastName");
                 uN = rs.getString("userName");
                 hS = rs.getString("highSchool");
-                cU = rs.getString("currentUniversity");
-                uC = rs.getString("universityChoices");
                 mC = rs.getString("majorChoices");
                 e = rs.getString("essays");
                 a = rs.getString("activities");
@@ -181,7 +175,7 @@ public class StudentDAOImpl implements StudentDAO {
                 aS = rs.getBoolean("accountStatus");
 
                 // make a StudentBean object out of the values
-                student = new StudentBean(fN, lN, uN, hS, cU, uC, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe);
+                student = new StudentBean(fN, lN, uN, hS, mC, e, a, ACT, SAT, GPA, gD, aS, em, cS, pN, pNe);
                 
                 // add the newly created object to the collection
                 aStudentCollection.add(student);

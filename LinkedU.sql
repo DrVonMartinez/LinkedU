@@ -4,8 +4,6 @@ CREATE TABLE LinkedU.Student
 	lastName VARCHAR (20) NOT NULL,
 	userName VARCHAR(10) NOT NULL,
 	highSchool VARCHAR(40),
-	currentUniversity VARCHAR(40),
-	universityChoices VARCHAR(40),
 	majorChoices VARCHAR(40),
 	essay VARCHAR(40),
 	activities VARCHAR(250),
@@ -47,7 +45,7 @@ CREATE TABLE LinkedU.University
 	universityName VARCHAR(50) NOT NULL,
 	USState CHAR(2) NOT NULL,
 	picture VARCHAR(40),
-	bio VARCHAR(4000)
+	bio VARCHAR(4000),
 	idealGPA DOUBLE,
 	idealACT INTEGER,
 	idealSAT INTEGER,
@@ -56,7 +54,7 @@ CREATE TABLE LinkedU.University
 	highlighted BOOLEAN default false,
 	notableMajors VARCHAR (50),
 	timeSubscribed INTEGER default 0,
-	CONSTRAINT primary_key_universityName PRIMARY KEY (name)
+	CONSTRAINT primary_key_universityName PRIMARY KEY (universityName)
 );
 
 CREATE TABLE LinkedU.Login
@@ -68,7 +66,7 @@ CREATE TABLE LinkedU.Login
 );
 
 
-INSERT INTO LinkedU.Login (userName, password, accountType)
+/*INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('admin', 'it353it353', 'admin');
 
 INSERT INTO LinkedU.Login (userName, password, accountType)
@@ -87,7 +85,7 @@ INSERT INTO LinkedU.Login (userName, password, accountType)
 VALUES ('recruiter2', 'password2', 'recruiter');
 
 INSERT INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber, phoneNetwork)
-VALUES ('student1', 'test', 'student1', 'a generically named high school',NULL ,28, NULL, 2.5, '2013-05-28', 'IL','bknigh1@ilstu.edu','6309346236', 'Google');
+VALUES ('student1', 'mitchell', 'cooper', 'Lockport Township High School', 28, NULL, 2.5, '2013-05-28', 'IL','bknigh1@ilstu.edu','6309346236', 'Google');
 
 INSERT INTO LinkedU.Student (userName, firstName, lastName, highSchool, currentUniversity, ACTScores, SATScores, GPA, GraduationDate, currentState, email, phoneNumber, phoneNetwork)
 VALUES ('student2', 'test', 'student2', 'a differently named high school','a college that exists',32, NULL, 4.0, '2017-05-28', 'IL','bknigh1@ilstu.edu','6309346236', 'Google');
@@ -99,7 +97,7 @@ INSERT INTO LinkedU.Student (userName, firstName, lastName, university, email, p
 VALUES ('recruiter1', 'test', 'recruiter1', 'Illinois State University', 'bknigh1@ilstu.edu','6309346236', 'Google');
 
 INSERT INTO LinkedU.Student (userName, firstName, lastName, university, email, phoneNumber, accountStatus, phoneNetwork)
-VALUES ('recruiter2', 'test', 'recruiter1', 'University of Illinois', 'bknigh1@ilstu.edu','6309346236', true, 'Google');
+VALUES ('recruiter2', 'test', 'recruiter1', 'University of Illinois', 'bknigh1@ilstu.edu','6309346236', true, 'Google');*/
 
 INSERT INTO LinkedU.Major (majorName)
 VALUES ('Mathematics');
