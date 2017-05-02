@@ -96,7 +96,7 @@ public class HomeController/* implements Serializable*/{
     }
     
     public String createStudent(){
-        
+        welcomeSMS(1);
         //if(login.getAccountType().equalsIgnoreCase("student")){
             StudentDAO studentDAO = new StudentDAOImpl();    // Creating a new object each time.
             login.setUserName(student.getUserName());
