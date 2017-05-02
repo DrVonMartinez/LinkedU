@@ -222,7 +222,7 @@ public class HomeController/* implements Serializable*/{
      * @return the phoneCarriers
      */
     public List<String> getPhoneCarriers() {
-        phoneCarriers = TextMessageSender.getCarriers();
+        phoneCarriers = Model.TextMessageWriter.getCarriers();
         return phoneCarriers;
     }
 
@@ -248,24 +248,22 @@ public class HomeController/* implements Serializable*/{
     }
     
     
-    /*private void welcomeSMS(int messageType)
+    private void welcomeSMS(int messageType)
     {
-        String cellPhoneNetwork = null;
-        String cellPhoneNumber = null;
-        String name = null;
+        String cellPhoneNetwork, cellPhoneNumber, name;
         if(messageType ==1)
         {
             cellPhoneNetwork = getStudent().getPhoneNetwork();
             cellPhoneNumber = getStudent().getPhoneNumber();
             name = getStudent().getFirstName() +" "+ getStudent().getLastName();
-            model.TextMessageSender.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU" + name + "!");
+            Model.TextMessageWriter.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU " + name + "!");
         }
         else if(messageType == 2)
         {
             cellPhoneNetwork = getRecruiter().getPhoneNetwork();
             cellPhoneNumber = getRecruiter().getPhoneNumber();
             name = getRecruiter().getFirstName() +" "+ getRecruiter().getLastName();
-            model.TextMessageSender.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU" + name + "!");
+            Model.TextMessageWriter.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU " + name + "!");
         }
-    }*/
+    }
 }
