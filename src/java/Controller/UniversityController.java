@@ -5,9 +5,15 @@
  */
 package Controller;
 
+import DAO.UniversityDAO;
+import DAO.UniversityDAOImpl;
 import Model.UniversityBean;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -40,5 +46,20 @@ public class UniversityController {
         return university.getWebsiteLink();
     }
     
-    
+    public String requestUniversityInfo (ComponentSystemEvent event)
+    {
+        HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        UniversityDAO universityDB = new UniversityDAOImpl();
+
+        //String reformatted = req.getParameter("university");
+        university = universityDB.findByName(req.getParameter("university").replaceAll("%20", " "));
+        //System.out.println(university.getIdealACT());
+        if(university == null)
+        {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+            nav.performNavigation("index?faces-redirect=true");
+        }
+        return null;
+    }
 }
