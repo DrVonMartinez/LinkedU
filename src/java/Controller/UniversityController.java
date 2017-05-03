@@ -41,6 +41,7 @@ public class UniversityController {
     {
         return university.getApplicationLink();
     }
+    
     public String visitUs()
     {
         return university.getWebsiteLink();
@@ -52,7 +53,13 @@ public class UniversityController {
         UniversityDAO universityDB = new UniversityDAOImpl();
 
         //String reformatted = req.getParameter("university");
+        try{
         university = universityDB.findByName(req.getParameter("university").replaceAll("%20", " "));
+        }
+        catch(NullPointerException npe)
+        {
+            university = null;
+        }
         //System.out.println(university.getIdealACT());
         if(university == null)
         {
@@ -67,11 +74,12 @@ public class UniversityController {
     {
         UniversityDAO universityDB = new UniversityDAOImpl();
         university = universityDB.findHighlighted();
+        System.out.println(university.getPicture());
         return null;
     }
     
-    public String navigateToHighlighted()
+    public String navigateTo(String name)
     { 
-         return "university.xhtml?university="+university.getUniversityName();
+         return "university.xhtml?university="+name;
     }
 }

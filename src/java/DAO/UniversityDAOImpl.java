@@ -226,27 +226,30 @@ public class UniversityDAOImpl implements UniversityDAO{
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
-            String query = "SELECT * FROM LinkedU.University u WHERE u.highlighted = TRUE";
+            String query = "SELECT * FROM LinkedU.University u WHERE u.highlighted";
             PreparedStatement pstmt = DBConn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
-            String uN, USS, pi,bi, wL,aL, nM;
-            double iGPA;
-            int id,iACT,iSAT, tS;
-            boolean h;
-            id=rs.getInt("id");
-            uN = rs.getString("universityName");
-            USS = rs.getString("USState");
-            pi = rs.getString("picture");
-            bi = rs.getString("bio");
-            iGPA = rs.getDouble("idealGPA");
-            iACT = rs.getInt("idealACT");
-            iSAT = rs.getInt("idealSAT");
-            wL = rs.getString("websiteLink");
-            aL = rs.getString("applicationLink");
-            h = rs.getBoolean("highlighted");
-            nM = rs.getString("notableMajors");
-            tS = rs.getInt("timeSubscribed");
-            aUniversity = new UniversityBean(id,uN,USS,pi,bi,iGPA,iACT,iSAT,wL,aL,h,nM,tS);
+            if(rs.next())
+            {
+                String uN, USS, pi,bi, wL,aL, nM;
+                double iGPA;
+                int id,iACT,iSAT, tS;
+                boolean h;
+                id=rs.getInt("id");
+                uN = rs.getString("universityName");
+                USS = rs.getString("USState");
+                pi = rs.getString("picture");
+                bi = rs.getString("bio");
+                iGPA = rs.getDouble("idealGPA");
+                iACT = rs.getInt("idealACT");
+                iSAT = rs.getInt("idealSAT");
+                wL = rs.getString("websiteLink");
+                aL = rs.getString("applicationLink");
+                h = rs.getBoolean("highlighted");
+                nM = rs.getString("notableMajors");
+                tS = rs.getInt("timeSubscribed");
+                aUniversity = new UniversityBean(id,uN,USS,pi,bi,iGPA,iACT,iSAT,wL,aL,h,nM,tS);
+            }
             rs.close();
             pstmt.close();
         }  

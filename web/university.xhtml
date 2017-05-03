@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -5,8 +6,8 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
+        <!--<title value ="#{universityController.university.universityName}"/>-->
         <title>LinkedU University</title>
-<!--<title value ="#{universityController.university.universityName}"/>-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <f:metadata>
             <f:event listener="#{universityController.requestUniversityInfo}" type="preRenderView" />
@@ -47,22 +48,26 @@
                 <div class="row"> 
                     <center style = "color:white;">
                         <h1><h:outputText value = "#{universityController.university.universityName}"/></h1>
-                        <h:graphicImage  name="universityImage" url="#{universityController.university.picture}"/>
+                        <h:graphicImage  name="universityImage" value="#{universityController.university.picture}"/>
                         <br/>
-                        <h3>ABOUT US </h3><br/>
+                        <h3>About Us </h3><br/>
                         <h:outputText value="#{universityController.university.bio}"/>
                         <br/>
-                        <h3>KEY MAJORS</h3> <br/>
+                        <h3>Key Majors</h3> <br/>
                         <h:outputText value ="#{universityController.university.formatMajors()}"/><br/>
-                        <h3>ACADEMICS</h3><br/>
+                        <h3>Academics</h3><br/>
                         <h:outputText value ="#{universityController.university.idealGPA}"/><br/>
                         <h:outputText value ="#{universityController.university.idealACT}"/><br/>
                         <h:outputText value ="#{universityController.university.idealSAT}"/><br/>
-                        <h3>LOCATION</h3><br/>
+                        <h3>Location</h3><br/>
                         <h:outputText value ="#{universityController.university.USState}"/><br/><br/><br/>
                         For More Information Visit: 
-                        <h:commandLink value ="#{universityController.university.websiteLink}"/><br/>
-                        <h:commandButton value="APPLY NOW" action="#{universityController.applyNow()}"/>
+                        <h:form>
+                            <a href="#{universityController.university.websiteLink}">#{universityController.university.websiteLink}</a>
+                        </h:form>
+                        <form action="#{universityController.applyNow()}">
+                            <input type="submit" value="Apply Now" />
+                        </form>
                     </center>
                 </div>
             </div>
