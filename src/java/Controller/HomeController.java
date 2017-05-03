@@ -144,14 +144,19 @@ public class HomeController/* implements Serializable*/{
                 case "Student":
                     student = new StudentBean((StudentBean)user);
                     login.setAccountType("Student");
-                    break;
+                    setLoggedIn(true);
+                    return "index.xhtml?faces-redirect=true";
                 case "Recruiter":
                     recruiter = new RecruiterBean((RecruiterBean)user);
                     login.setAccountType("Recruiter");
-                    break;
+                    setLoggedIn(true);
+                    return "index.xhtml?faces-redirect=true";
+                case "Admin":
+                    setLoggedIn(true);
+                    return "admin.xhtml?faces-redirect=true";
+                default:
+                    return null;
             }
-            setLoggedIn(true);
-            return "index.xhtml?faces-redirect=true";
         } else {
             setLoggedIn(false);
             //return to login and add error message
@@ -271,19 +276,21 @@ public class HomeController/* implements Serializable*/{
     private void welcomeSMS(int messageType)
     {
         String cellPhoneNetwork, cellPhoneNumber, name;
-        if(messageType ==1)
+        if(messageType == 1)
         {
-            cellPhoneNetwork = getStudent().getPhoneNetwork();
-            cellPhoneNumber = getStudent().getPhoneNumber();
-            name = getStudent().getFirstName() +" "+ getStudent().getLastName();
+            cellPhoneNetwork = student.getPhoneNetwork();
+            cellPhoneNumber = student.getPhoneNumber();
+            name = student.getFirstName() + " " + student.getLastName();
             Model.TextMessageWriter.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU " + name + "!");
+            System.out.println("Sent! (" + messageType + ") (to " + cellPhoneNumber + " on " + cellPhoneNetwork + ")");
         }
         else if(messageType == 2)
         {
-            cellPhoneNetwork = getRecruiter().getPhoneNetwork();
-            cellPhoneNumber = getRecruiter().getPhoneNumber();
-            name = getRecruiter().getFirstName() +" "+ getRecruiter().getLastName();
+            cellPhoneNetwork = recruiter.getPhoneNetwork();
+            cellPhoneNumber = recruiter.getPhoneNumber();
+            name = recruiter.getFirstName() + " " + recruiter.getLastName();
             Model.TextMessageWriter.sendSMS(cellPhoneNetwork, cellPhoneNumber, "Welcome to LinkedU " + name + "!");
+            System.out.println("Sent! (" + messageType + ") (to " + cellPhoneNumber + " on " + cellPhoneNetwork + ")");
         }
     }
 
