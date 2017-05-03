@@ -34,7 +34,7 @@ public class UniversityDAOImpl implements UniversityDAO{
             String insertString;
             //String newFirstName = aUser.getFirstName().replace("'","''");
             //String newLastName = aUser.getLastName().replace("'","''");
-            insertString = "INSERT INTO LinkedU.University VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            insertString = "INSERT INTO LinkedU.University VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = DBConn.prepareStatement(insertString);
             
@@ -72,7 +72,7 @@ public class UniversityDAOImpl implements UniversityDAO{
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
-            String query = "SELECT * FROM LinkedU.University;";
+            String query = "SELECT * FROM LinkedU.University";
             PreparedStatement pstmt = DBConn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             UniversityBean university;
@@ -123,34 +123,39 @@ public class UniversityDAOImpl implements UniversityDAO{
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
-            String query = "SELECT * FROM LinkedU.University u WHERE u.universityName = ?;";
+            String query = "SELECT * FROM LinkedU.University u WHERE u.universityName = ?";
+            
             PreparedStatement pstmt = DBConn.prepareStatement(query);
             pstmt.setString(1, universityName);
+            System.out.println(query);
             ResultSet rs = pstmt.executeQuery();
-            String uN, USS, pi,bi, wL,aL, nM;
-            double iGPA;
-            int id,iACT,iSAT, tS;
-            boolean h;
-            id=rs.getInt("id");
-            uN = rs.getString("universityName");
-            USS = rs.getString("USState");
-            pi = rs.getString("picture");
-            bi = rs.getString("bio");
-            iGPA = rs.getDouble("idealGPA");
-            iACT = rs.getInt("idealACT");
-            iSAT = rs.getInt("idealSAT");
-            wL = rs.getString("websiteLink");
-            aL = rs.getString("applicationLink");
-            h = rs.getBoolean("highlighted");
-            nM = rs.getString("notableMajors");
-            tS = rs.getInt("timeSubscribed");
-            aUniversity = new UniversityBean(id,uN,USS,pi,bi,iGPA,iACT,iSAT,wL,aL,h,nM,tS);
-            rs.close();
+            if(rs.next())
+            {
+                String uN, USS, pi,bi, wL,aL, nM;
+                double iGPA;
+                int id,iACT,iSAT, tS;
+                boolean h;
+                id=rs.getInt("id");
+                uN = rs.getString("universityName");
+                USS = rs.getString("USState");
+                pi = rs.getString("picture");
+                bi = rs.getString("bio");
+                iGPA = rs.getDouble("idealGPA");
+                iACT = rs.getInt("idealACT");
+                iSAT = rs.getInt("idealSAT");
+                wL = rs.getString("websiteLink");
+                aL = rs.getString("applicationLink");
+                h = rs.getBoolean("highlighted");
+                nM = rs.getString("notableMajors");
+                tS = rs.getInt("timeSubscribed");
+                aUniversity = new UniversityBean(id,uN,USS,pi,bi,iGPA,iACT,iSAT,wL,aL,h,nM,tS);
+                rs.close();
+            }
             pstmt.close();
         }  
         catch(Exception e)
         {
-            System.err.println(e.getMessage());
+            System.err.println("Error has occurred");
         }
         try{
             DBConn.close();
@@ -169,7 +174,7 @@ public class UniversityDAOImpl implements UniversityDAO{
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
-            String query = "SELECT * FROM LinkedU.University u WHERE u.USState = ?;";
+            String query = "SELECT * FROM LinkedU.University u WHERE u.USState = ?";
             PreparedStatement pstmt = DBConn.prepareStatement(query);
             pstmt.setString(1,state);
             ResultSet rs = pstmt.executeQuery();
@@ -221,7 +226,7 @@ public class UniversityDAOImpl implements UniversityDAO{
             DBHelper.loadDriver("org.apache.derby.jdbc.ClientDriver");
             String myDB = "jdbc:derby://gfish2.it.ilstu.edu:1527/mwcoope_Sp2017_LinkedU";
             DBConn = DBHelper.connect2DB(myDB, "itkstu", "student");
-            String query = "SELECT * FROM LinkedU.University u WHERE u.highlighted = TRUE;";
+            String query = "SELECT * FROM LinkedU.University u WHERE u.highlighted = TRUE";
             PreparedStatement pstmt = DBConn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             String uN, USS, pi,bi, wL,aL, nM;
