@@ -9,23 +9,25 @@ package javamailapp;
  * @author BillyLim
  * Code snippet courtesy of your fellow student Dinesh Daultani
  */
+import Controller.*;
+import Model.*;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 //import model.UserBean;
 
 public class JavaMailApp {
-/*
-    public static void scheduleAppointmentEmail(UserBean aUser) {
+
+    public static void scheduleAppointmentEmail(AppointmentBean ab) {
 
         // Recipient's email ID needs to be mentioned.
-        String to = aUser.getEmail();
+        String to = ab.getStudent().getEmail();
 
         // Sender's email ID needs to be mentioned
         String from = "no.reply.linkedu@gmail.com";
         
         // Assuming you are sending email from this host
-        String host = "www.gmail.com";
+        String host = "smtp.gmail.com";
 
         // Get system properties
         Properties properties = System.getProperties();
@@ -54,26 +56,27 @@ public class JavaMailApp {
                     new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("Thank you for signing up with ISU!");
-
+            message.setSubject("Appointment Scheduled with " + ab.getUniversity() + "!");
+            int month = ab.getDate().get(Calendar.MONTH) + 1;
             // Send the actual HTML message, as big as you like
-            String str = "<img src='https://universitymarketing.illinoisstate.edu/images/logos/ISU-Seal_1C_186.png' align='middle' style='width: 150px; height: auto;'/><br/>";
-            str += "<h3>Welcome " + aUser.getFirstName() + " " + aUser.getLastName() + ",</h3>";
-            str += "<p>Thank you for creating an account with Illinois State University. We have created your account with the following information you listed:</p>";
-            str += "<ul><li style=\"margin-left: 40px\">User ID: " + aUser.getUserID() + 
-                    "</li><li style=\"margin-left: 40px\">Security Question: " + aUser.getSecurityQuestion() + 
-                    "</li><li style=\"margin-left: 40px\">Security Answer: " + aUser.getSecurityAnswer() + "</li></ul>";
+            //String str = "<img src='https://universitymarketing.illinoisstate.edu/images/logos/ISU-Seal_1C_186.png' align='middle' style='width: 150px; height: auto;'/><br/>";
+            String str = "<h3>" + ab.getStudent().getFirstName() + " " + ab.getStudent().getLastName() + ",</h3>";
+            str += "<p>Thank you for scheduling an appointment with " + ab.getUniversity() + " through LinkedU. We have created your appointment with the following date:</p>";
+            str += "<ul><li style=\"margin-left: 40px\">Date: " + month + "/" + ab.getDate().get(Calendar.DAY_OF_MONTH) + "/" + ab.getDate().get(Calendar.YEAR) +
+                    "</li><li style=\"margin-left: 40px\">Time: " + ab.getTime() + "</li></ul>";
             str += "<h4>Thank you,</h4>";
-            str += "<h4>Illinois State University IT</h4>";
+            str += "<h4>LinkedU</h4>";
                     
             message.setContent(str,"text/html");
 
             // Send message
             Transport.send(message);
+            
+            //System.out.println(ab.getDate().get(Calendar.MONTH) + 1 + "/" + ab.getDate().get(Calendar.DAY_OF_MONTH) + "/" + ab.getDate().get(Calendar.YEAR));
             System.out.println("Sent message successfully....");
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
     }
-    */
+    
 }
