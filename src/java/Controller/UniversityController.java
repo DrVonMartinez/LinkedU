@@ -62,4 +62,16 @@ public class UniversityController {
         }
         return null;
     }
+    
+    public String findHighlighted(ComponentSystemEvent event)
+    {
+        UniversityDAO universityDB = new UniversityDAOImpl();
+        university = universityDB.findHighlighted();
+        return null;
+    }
+    
+    public String navigateToHighlighted()
+    { 
+         return "university.xhtml?university="+university.getUniversityName();
+    }
 }

@@ -1,6 +1,9 @@
 
 package Model;
 
+import DAO.MajorDAO;
+import DAO.MajorDAOImpl;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -116,8 +119,11 @@ public class UniversityBean
     /**
      * @return the idealGPA
      */
-    public double getIdealGPA() {
-        return idealGPA;
+    public String getIdealGPA() {
+        if(idealGPA!=0)
+            return "GPA: "+ idealGPA;
+        else
+            return "";
     }
 
     /**
@@ -130,8 +136,11 @@ public class UniversityBean
     /**
      * @return the idealACT
      */
-    public int getIdealACT() {
-        return idealACT;
+    public String getIdealACT() {
+        if(idealACT!=0)
+            return "ACT: "+ idealACT;
+        else
+            return "";
     }
 
     /**
@@ -144,8 +153,11 @@ public class UniversityBean
     /**
      * @return the idealSAT
      */
-    public int getIdealSAT() {
-        return idealSAT;
+    public String getIdealSAT() {
+        if(idealSAT!=0)
+            return "SAT: "+ idealSAT;
+        else
+            return "";
     }
 
     /**
@@ -203,6 +215,7 @@ public class UniversityBean
     public String getNotableMajors() {
         return notableMajors;
     }
+    
 
     /**
      * @param notableMajors the notableMajors to set
@@ -227,19 +240,21 @@ public class UniversityBean
  
     public String formatMajors()
     {
-        String list ="";
-        String[] brokenMajors = notableMajors.split(";");
-        for(String i: brokenMajors)
+        MajorDAO majorDB = new MajorDAOImpl();
+        ArrayList<String> majorList = majorDB.findMajors(notableMajors);
+        String returnable = "";
+        for(int i = 0;i<majorList.size(); i++)
         {
-            list+=i;
+            if(i!= majorList.size() -1)
+                returnable+= majorList.get(i) +", ";
+            else
+                returnable += " and "+ majorList.get(i);
         }
-        return list;
+        return returnable;
     }
     
-    public String formatAcademics()
+    public String navigateToWebsite()
     {
-        String academics="";
-        academics += "GPA: " + idealGPA + "<br/>ACT: " + idealACT + "<br/>SAT" + idealSAT;
-        return academics;
+        return "university.xhtml?university=" + universityName;
     }
 }
