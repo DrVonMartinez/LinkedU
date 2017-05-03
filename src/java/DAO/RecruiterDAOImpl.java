@@ -51,7 +51,7 @@ public class RecruiterDAOImpl implements RecruiterDAO {
             
             pstmt.setString(1, aLogin.getUserName());
             pstmt.setString(2, aLogin.getPasswordHash());
-            pstmt.setString(2, aLogin.getAccountType());
+            pstmt.setString(3, aLogin.getAccountType());
 
             
             pstmt.executeUpdate();

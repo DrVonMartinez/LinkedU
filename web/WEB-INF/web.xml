@@ -19,6 +19,9 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <listener>
+        <listener-class>Controller.Config</listener-class>
+    </listener>
 </web-app>
