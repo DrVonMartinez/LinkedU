@@ -78,8 +78,8 @@ public class UniversityController {
         return null;
     }
     
-    public String navigateTo(String name)
+    public String navigateTo()
     { 
-         return "university.xhtml?university="+name;
+         return ("http://gfish2.it.ilstu.edu/mwcoope_Spring2017_LinkedU/university.xhtml?university="+this.university.getUniversityName());
     }
 }

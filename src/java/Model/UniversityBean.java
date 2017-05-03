@@ -255,6 +255,6 @@ public class UniversityBean
     
     public String navigateToWebsite()
     {
-        return "university.xhtml?university=" + universityName;
+        return "http://gfish2.it.ilstu.edu/mwcoope_Spring2017_LinkedU/university.xhtml?university=" + universityName;
     }
 }

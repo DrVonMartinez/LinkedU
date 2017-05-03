@@ -258,11 +258,12 @@ public class HomeController/* implements Serializable*/{
     
     public ArrayList<String> getUniversities(){
         //Access UniversityDAO to get full list of active universities
-        
+        UniversityDAO universityDB = new UniversityDAOImpl();
+        ArrayList u = universityDB.findAll();
         //this for temporary use.
-        ArrayList<String> u = new ArrayList();
-        u.add("University of Illinois");
-        u.add("Illinois State University");
+        //ArrayList<String> u = new ArrayList();
+        //u.add("University of Illinois");
+        //u.add("Illinois State University");
         
         return u;
     }
