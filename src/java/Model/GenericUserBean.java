@@ -14,7 +14,7 @@ public class GenericUserBean {
     private String accountType;
     
     public GenericUserBean(){
-        accountType = "Student";
+        accountType = "";       //"Student";
     }
     
     public GenericUserBean(String type){

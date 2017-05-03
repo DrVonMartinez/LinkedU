@@ -100,13 +100,13 @@
                                 <h:message for="stuPhoneNumber" style="color: red;" /><br/><br/>
                                 Phone Network: <h:selectOneMenu id="stuPhoneNetwork" value="#{homeController.student.phoneNetwork}" required="true" requiredMessage="Please select phone carrier">
                                     <f:selectItems value="#{homeController.phoneCarriers}" />
-                                </h:selectOneMenu><br/><br/>
+                                </h:selectOneMenu>
                                 <h:message for="stuPhoneNetwork" style="color: red;" /><br/><br/>
-                                ACT Score: <h:inputText id="stuACT" value="#{homeController.student.ACTScores}" validatorMessage="ACT Score must be between 1 and 36" a:placeholder="1-36">
+                                ACT Score: <h:inputText id="stuACT" value="#{homeController.student.ACTScores}" required="true" validatorMessage="ACT Score must be between 1 and 36" a:placeholder="1-36">
                                     <f:validateLongRange minimum="1" maximum="36" />
                                 </h:inputText>
                                 <h:message for="stuACT" style="color: red;" /><br/><br/>
-                                SAT Score: <h:inputText id="stuSAT" value="#{homeController.student.SATScores}" validatorMessage="SAT Score must be between 400 and 1600" a:placeholder="400-1600">
+                                SAT Score: <h:inputText id="stuSAT" value="#{homeController.student.SATScores}" required="true" validatorMessage="SAT Score must be between 400 and 1600" a:placeholder="400-1600">
                                     <f:validateLongRange minimum="400" maximum="1600" />
                                 </h:inputText>
                                 <h:message for="stuSAT" style="color: red;" /><br/><br/>
@@ -114,7 +114,7 @@
                                 <h3>Optional fields</h3>
                                 High School: <h:inputText id="stuHighSchool" value="#{homeController.student.highSchool}">
                                 </h:inputText><br/><br/>
-                                Activities/Bio: <h:inputTextarea id="stuActivites" rows="3" cols="40" value="#{homeController.student.activities}">
+                                Activities/Bio: <h:inputTextarea id="stuActivites" rows="3" cols="60" value="#{homeController.student.activities}">
                                 </h:inputTextarea><br/><br/>
                                 GPA: <h:selectOneMenu id="stuGPA" value="#{homeController.student.GPA}">
                                     <f:selectItem itemValue="#{null}" itemLabel="--select--" />

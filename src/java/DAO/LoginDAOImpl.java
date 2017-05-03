@@ -110,8 +110,8 @@ public class LoginDAOImpl implements LoginDAO{
                         user = null;
                     }
                     
-                } else if(accountType.equalsIgnoreCase("admin")){
-                    user = new AdminBean();
+                } else if(accountType.equalsIgnoreCase("Admin")){
+                    user = aLogin;
                 }
                 
             } else{ //login unsuccessful

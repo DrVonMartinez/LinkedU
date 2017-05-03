@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @ManagedBean
 @SessionScoped
-public class LoginBean{
+public class LoginBean extends GenericUserBean{
     
     private String userName;
     private String passwordHash;
