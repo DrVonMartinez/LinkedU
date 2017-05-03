@@ -42,9 +42,9 @@ public class UniversityDAOImpl implements UniversityDAO{
             pstmt.setString(2, aUniversity.getUSState());
             pstmt.setString(3, aUniversity.getPicture());
             pstmt.setString(4, aUniversity.getBio());
-            pstmt.setDouble(5, aUniversity.getIdealGPA());
-            pstmt.setInt(6, aUniversity.getIdealACT());
-            pstmt.setInt(7, aUniversity.getIdealSAT());
+            pstmt.setDouble(5, Double.parseDouble(aUniversity.getIdealGPA()));
+            pstmt.setInt(6, Integer.parseInt(aUniversity.getIdealACT()));
+            pstmt.setInt(7, Integer.parseInt(aUniversity.getIdealSAT()));
             pstmt.setString(8, aUniversity.getWebsiteLink());
             pstmt.setString(9, aUniversity.getApplicationLink());
             pstmt.setBoolean(10, aUniversity.isHighlighted());
