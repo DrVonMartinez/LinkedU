@@ -245,7 +245,7 @@ public class HomeController/* implements Serializable*/{
      */
     public List<String> getPhoneCarriers() {
         phoneCarriers = Model.TextMessageWriter.getCarriers();
-       // phoneCarriers = new ArrayList<>();
+        //phoneCarriers = new ArrayList<>();
         return phoneCarriers;
     }
 

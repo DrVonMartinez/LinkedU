@@ -73,6 +73,7 @@ and open the template in the editor.
                         </h:selectOneMenu><br/><br/>
                         <h:form id="studentSignupForm"> 
                             <div id="studentForm">
+                                <h3>Required fields</h3>
                                 First Name: <h:inputText id="stuFirstName" value="#{homeController.student.firstName}" required="true" requiredMessage="Please enter first name" validatorMessage="First name must be between 2 and 25 characters">
                                     <f:validateLength minimum="2" maximum="25"/>
                                 </h:inputText>
@@ -106,12 +107,60 @@ and open the template in the editor.
                                     <f:selectItems value="#{homeController.phoneCarriers}" />
                                 </h:selectOneMenu><br/><br/>
                                 <h:message for="stuPhoneNetwork" style="color: red;" /><br/><br/>
-
+                                ACT Score: <h:inputText id="stuACT" value="#{homeController.student.ACTScores}" validatorMessage="ACT Score must be between 1 and 36" a:placeholder="1-36">
+                                    <f:validateLongRange minimum="1" maximum="36" />
+                                </h:inputText>
+                                <h:message for="stuACT" style="color: red;" /><br/><br/>
+                                SAT Score: <h:inputText id="stuSAT" value="#{homeController.student.SATScores}" validatorMessage="SAT Score must be between 400 and 1600" a:placeholder="400-1600">
+                                    <f:validateLongRange minimum="400" maximum="1600" />
+                                </h:inputText>
+                                <h:message for="stuSAT" style="color: red;" /><br/><br/>
+                                
+                                <h3>Optional fields</h3>
+                                High School: <h:inputText id="stuHighSchool" value="#{homeController.student.highSchool}">
+                                </h:inputText><br/><br/>
+                                Activities/Bio: <h:inputTextarea id="stuActivites" rows="3" cols="40" value="#{homeController.student.activities}">
+                                </h:inputTextarea><br/><br/>
+                                GPA: <h:selectOneMenu id="stuGPA" value="#{homeController.student.GPA}">
+                                    <f:selectItem itemValue="#{null}" itemLabel="--select--" />
+                                    <f:selectItem itemValue = "1" itemLabel = "1.0" />
+                                    <f:selectItem itemValue = "1.1" itemLabel = "1.1" />
+                                    <f:selectItem itemValue = "1.2" itemLabel = "1.2" />
+                                    <f:selectItem itemValue = "1.3" itemLabel = "1.3" />
+                                    <f:selectItem itemValue = "1.4" itemLabel = "1.4" />
+                                    <f:selectItem itemValue = "1.5" itemLabel = "1.5" />
+                                    <f:selectItem itemValue = "1.6" itemLabel = "1.6" />
+                                    <f:selectItem itemValue = "1.7" itemLabel = "1.7" />
+                                    <f:selectItem itemValue = "1.8" itemLabel = "1.8" />
+                                    <f:selectItem itemValue = "1.9" itemLabel = "1.9" />
+                                    <f:selectItem itemValue = "2" itemLabel = "2.0" />
+                                    <f:selectItem itemValue = "2.1" itemLabel = "2.1" />
+                                    <f:selectItem itemValue = "2.2" itemLabel = "2.2" />
+                                    <f:selectItem itemValue = "2.3" itemLabel = "2.3" />
+                                    <f:selectItem itemValue = "2.4" itemLabel = "2.4" />
+                                    <f:selectItem itemValue = "2.5" itemLabel = "2.5" />
+                                    <f:selectItem itemValue = "2.6" itemLabel = "2.6" />
+                                    <f:selectItem itemValue = "2.7" itemLabel = "2.7" />
+                                    <f:selectItem itemValue = "2.8" itemLabel = "2.8" />
+                                    <f:selectItem itemValue = "2.9" itemLabel = "2.9" />
+                                    <f:selectItem itemValue = "3" itemLabel = "3.0" />
+                                    <f:selectItem itemValue = "3.1" itemLabel = "3.1" />
+                                    <f:selectItem itemValue = "3.2" itemLabel = "3.2" />
+                                    <f:selectItem itemValue = "3.3" itemLabel = "3.3" />
+                                    <f:selectItem itemValue = "3.4" itemLabel = "3.4" />
+                                    <f:selectItem itemValue = "3.5" itemLabel = "3.5" />
+                                    <f:selectItem itemValue = "3.6" itemLabel = "3.6" />
+                                    <f:selectItem itemValue = "3.7" itemLabel = "3.7" />
+                                    <f:selectItem itemValue = "3.8" itemLabel = "3.8" />
+                                    <f:selectItem itemValue = "3.9" itemLabel = "3.9" />
+                                    <f:selectItem itemValue = "4" itemLabel = "4.0" />
+                                </h:selectOneMenu><br/><br/>
                                 <h:commandButton id="stuSubmitID" value="Submit" action="#{homeController.createStudent()}"/>
                             </div>
                         </h:form>
                         <h:form id="recruiterSignupForm" style="display:none;">
                             <div id="recruiterForm">
+                                <h3>Required fields</h3>
                                 First Name: <h:inputText id="recFirstName" value="#{homeController.recruiter.firstName}" required="true" requiredMessage="Please enter first name" validatorMessage="First name must be between 2 and 25 characters">
                                     <f:validateLength minimum="2" maximum="25"/>
                                 </h:inputText>
