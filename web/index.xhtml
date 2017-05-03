@@ -55,10 +55,15 @@
                 <div class="row">  
                     <center style = "color:white;">
                         <h1>LinkedU University Highlight</h1>
-                        <h:graphicImage  name="universityImage" url="#{universityController.university.picture}"/><br/>
+                        <img src ="#{universityController.university.picture}"/><br/>
+                        <!--<h:graphicImage  name="universityImage" value="#{universityController.university.picture}"/><br/>-->
                         <h2><h:outputText value = "#{universityController.university.universityName}"/></h2>
-                        <h:button value="Find Out More" outcome="#{universityController.university.navigateToWebsite()}" />
-                        <h:commandButton id="linkUniversityPage" value="Find out More" action="#{universityController.navigateToHighlighted()}"/>
+                      <!--  <h:form >
+                            <h:button id="linkUniversityPage" value="Find out More" />
+                        </h:form>-->
+                        <form action="#{universityController.navigateTo(university.universityName)}">
+                            <input type="submit" value="Find Out More" />
+                        </form>
                     </center>
                 </div>
             </div>

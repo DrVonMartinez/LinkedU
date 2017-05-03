@@ -44,7 +44,7 @@ CREATE TABLE LinkedU.University
 	id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	universityName VARCHAR(50) NOT NULL,
 	USState CHAR(2) NOT NULL,
-	picture VARCHAR(40),
+	picture VARCHAR(100),
 	bio VARCHAR(4000),
 	idealGPA DOUBLE,
 	idealACT INTEGER,
@@ -130,9 +130,9 @@ INSERT INTO LinkedU.Major (majorName)
 VALUES ('Law');
 
 INSERT INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
-VALUES ('University of Illinois', 'IL', NULL,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
+VALUES ('University of Illinois', 'IL', 'http://blog.admissions.illinois.edu/wp-content/uploads/2013/03/UNION.-530x309.jpg' ,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
 3.32,26,1340,'http://illinois.edu/','http://admissions.illinois.edu/apply/' , false, '2,1,5,8',0);
 
 INSERT INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
-VALUES ('Illinois State University', 'IL', NULL,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
+VALUES ('Illinois State University', 'IL', 'http://english.illinoisstate.edu/digitaldefoe/defoesociety/isu.jpg' ,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
 2.37,22,NULL,'https://illinoisstate.edu/','http://admissions.illinoisstate.edu/apply/' , true, '3,1,5,6,9',0);
