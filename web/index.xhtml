@@ -31,8 +31,19 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li><a href="index.xhtml">HOME</a></li>
-                            <li><a class="btn-header" href="signup.xhtml">Sign up</a></li>
-                            <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
+                            <h:panelGroup rendered="#{homeController.studentLoggedIn()}">
+                                <li><a class="btn-header" href="scheduleAppt.xhtml">Schedule Appointment</a></li>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{!homeController.loggedIn}">
+                                <li><a class="btn-header" href="signup.xhtml">Sign up</a></li>
+                                <li><a class="btn-header active" href="login.xhtml">Log in</a></li>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{homeController.loggedIn}">
+                                <li><h:form>
+                                    <h:commandLink class="btn-header" action="#{homeController.logout()}">Log out</h:commandLink>
+                                </h:form></li>
+                            <!--<li><a class="btn-header" href="login.xhtml">Log out</a></li>-->
+                            </h:panelGroup>
                         </ul>
                     </div>
                 </div>
