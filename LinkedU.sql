@@ -130,9 +130,13 @@ INSERT INTO LinkedU.Major (majorName)
 VALUES ('Law');
 
 INSERT INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
-VALUES ('University of Illinois', 'IL', 'http://blog.admissions.illinois.edu/wp-content/uploads/2013/03/UNION.-530x309.jpg' ,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
+VALUES ('University of Illinois', 'IL', 'http://blog.admissions.illinois.edu/wp-content/uploads/2013/03/UNION.-530x309.jpg' ,'University of Illinois is one of the founding members of the Big Ten Conference. U of I was founded in 1867 and is located in Champaign-Urbana.',
 3.32,26,1340,'http://illinois.edu/','http://admissions.illinois.edu/apply/' , false, '2,1,5,8',0);
 
 INSERT INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
-VALUES ('Illinois State University', 'IL', 'http://english.illinoisstate.edu/digitaldefoe/defoesociety/isu.jpg' ,'This is a pregenerated statement about a university. Typically this includes the location and contact information of the university and a short statement',
+VALUES ('Illinois State University', 'IL', 'http://english.illinoisstate.edu/digitaldefoe/defoesociety/isu.jpg' ,'Illinois State University is the oldest public university in Illinois and was founded in 1857. ISU is in Bloomington-Normal.',
 2.37,22,NULL,'https://illinoisstate.edu/','http://admissions.illinoisstate.edu/apply/' , true, '3,1,5,6,9',0);
+
+INSERT INTO LinkedU.University (universityName, USState, picture, bio, idealGPA,idealACT, idealSAT, websiteLink, applicationLink,highlighted,notableMajors, timeSubscribed)
+VALUES ('College of DuPage', 'IL', 'https://en.wikipedia.org/wiki/File:College_of_DuPage.JPG' ,'College of DuPage is a two-year community college in Glen Ellyn. College of DuPage is the second largest provider of undergraduate education in Illinois.',
+2.0,NULL,NULL,'http://www.cod.edu/','https://admissions.cod.edu/Datatel.ERecruiting.Web.External/Pages/Welcome.aspx' , false, '2,4,6',0);

@@ -26,21 +26,24 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-TextSenderService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/TextSenderService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TextSenderService" destdir="${build.generated.dir}/jax-wsCache/TextSenderService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TextSenderService/wsdl/gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService?WSDL" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TextSenderService/wsdl/gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/TextSenderService"/>
+    <target name="wsimport-service-TextMessageService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/service/TextMessageService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/service/TextMessageService" destdir="${build.generated.dir}/jax-wsCache/service/TextMessageService" wsdl="${basedir}/${conf-dir}xml-resources/web-services/TextMessageService/wsdl/gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-services/TextMessageService/wsdl/gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/service/TextMessageService"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/TextSenderService">
+            <fileset dir="${build.generated.dir}/jax-wsCache/service/TextMessageService">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
+        <copy todir="${build.web.dir}/WEB-INF/wsdl/TextMessageService">
+            <fileset dir="${basedir}/${conf-dir}xml-resources/web-services/TextMessageService/wsdl/"/>
+        </copy>
     </target>
-    <target name="wsimport-client-clean-TextSenderService" depends="-init-project">
+    <target name="wsimport-service-clean-TextMessageService" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/edu/ilstu/it"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/TextSenderService"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/service/TextMessageService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-TextSenderService"/>
+    <target name="wsimport-service-generate" depends="wsimport-service-TextMessageService"/>
 </project>

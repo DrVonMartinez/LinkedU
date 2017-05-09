@@ -80,6 +80,6 @@ public class UniversityController {
     
     public String navigateTo()
     { 
-         return ("http://gfish2.it.ilstu.edu/mwcoope_Spring2017_LinkedU/university.xhtml?university="+this.university.getUniversityName());
+         return ("http://gfish2.it.ilstu.edu/mwcoope_Spring2017_LinkedU/university.xhtml?university="+this.university.getUniversityName().replaceAll(" ","%20"));
     }
 }

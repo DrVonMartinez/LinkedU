@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-  </services>
-  <clients>
-    <client name="TextSenderService">
+    <service name="TextMessageService">
+      <implementation-class>edu.ilstu.it.TextMessageService</implementation-class>
       <wsdl-url>http://gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService?WSDL</wsdl-url>
       <local-wsdl-file>gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService.wsdl</local-wsdl-file>
+      <service-name>TextSenderService</service-name>
+      <port-name>TextSenderPort</port-name>
       <package-name>edu.ilstu.it</package-name>
       <catalog-file>catalog.xml</catalog-file>
+      <use-provider>false</use-provider>
       <wsimport-options>
         <wsimport-option>
           <wsimport-option-name>extension</wsimport-option-name>
@@ -22,10 +24,6 @@
           <wsimport-option-value>false</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
-          <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://gfish2.it.ilstu.edu/ISUTextSMS2/TextSenderService?WSDL</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
         </wsimport-option>
@@ -34,7 +32,9 @@
           <wsimport-option-value>true</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
-    </client>
+    </service>
+  </services>
+  <clients>
   </clients>
   <jsr109>true</jsr109>
 </jax-ws>
